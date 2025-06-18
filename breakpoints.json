@@ -1,0 +1,9 @@
+{
+    "phone": "375px",
+    "large-phone": "480px",
+    "tablet": "680px",
+    "large-tablet": "960px",
+    "laptop": "1080px",
+    "desktop": "1280px",
+    "large-desktop": "1440px"
+}

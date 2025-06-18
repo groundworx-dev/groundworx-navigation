@@ -1,0 +1,5 @@
+{
+    "editorScript": "file:./editor.js",
+    "script": "file:./main.js",
+	"viewScriptModule": [ "file:./view.js" ]
+}

@@ -1,0 +1,44 @@
+.wp-block-groundworx-navigation-menu.layout-type--vertical-menu {
+    .gwx-menu__container, .gwx-menu-item__container {
+        display: block;
+        list-style-type: none;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        unicode-bidi: isolate;
+    }
+
+    .gwx-menu-item__container {
+        padding-inline-start: 40px;
+    }
+
+    .wp-block-page-list {
+        flex-direction: column;
+    }
+   
+    :is(.gwx-menu__container) :is(.gwx-menu-item__container, .wp-block-page-list) {
+        .gwx-menu-item__container, .wp-block-page-list {
+            list-style-type: none;
+        }
+    }
+  
+    :is(.gwx-menu__container) {
+        .gwx-menu-item__container, .wp-block-page-list {
+            list-style-type: none;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+        }
+    }
+    ::marker {
+        unicode-bidi: isolate;
+        font-variant-numeric: tabular-nums;
+        text-transform: none;
+        text-indent: 0px !important;
+        text-align: start !important;
+        text-align-last: auto !important;
+    }
+    .gwx-menu-item {
+        display: list-item;
+        text-align: -webkit-match-parent;
+        unicode-bidi: isolate;
+    }
+}

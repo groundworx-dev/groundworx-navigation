@@ -1,0 +1,66 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "groundworx/navigation-menu",
+    "title": "Menu",
+    "description": "A responsive menu.",
+	"category": "design",
+	"keywords": [ "menu", "navigation", "links" ],
+    "icon": "menu",
+    "allowedBlocks": [
+		"groundworx/navigation-link",
+		"groundworx/navigation-submenu",
+		"groundworx/navigation-spacer",
+		"core/page-list"
+	],
+	"parent": ["groundworx/navigation"],
+    "supports": {
+		"anchor": true,
+		"ariaLabel": true,
+		"html": false,
+		"inserter": true,
+		"className": true,
+		"__experimentalSettings": false,
+		"interactivity": true,
+		"renaming": false
+    },
+   "attributes": {
+		"templateLock": {
+			"type": [ "string", "boolean" ],
+			"enum": [ "all", "insert", "contentOnly", false ]
+		},
+		"layout": {
+			"type": "object",
+			"default": {
+				"type": "flex",
+				"orientation": "horizontal",
+				"justifyContent": "left",
+				"flexWrap": "wrap"
+			}
+		},
+		"responsiveLayout": {
+			"type": "object"
+		}
+	},
+	"providesContext": {
+		"responsiveLayout": "responsiveLayout"
+	},
+	"usesContext": [
+		"fontSize",
+		"customFontSize",
+		"showSubmenuIcon",
+		"maxNestingLevel",
+		"openSubmenusOnHover",
+		"ref",
+		"type",
+		"toType",
+		"switchAt",
+		"style"
+	],
+	"selectors": {
+		"root": ".wp-block-groundworx-menu"
+	},
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": [ "file:./style-index.css" ]
+}

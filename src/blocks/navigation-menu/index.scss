@@ -1,0 +1,43 @@
+.wp-block-groundworx-navigation-menu {
+    &:hover {
+        outline: 1px dashed color-mix(in srgb, currentColor 40%, transparent);
+    }
+    .block-list-appender {
+        position: relative;
+        width: auto;
+        padding: .25rem;
+        > * {
+            flex-grow: 1;
+        }
+        .block-editor-button-block-appender {
+            height: unset;
+            padding: 0;
+            line-height: inherit;
+            font-size: inherit;
+            color: currentColor;
+            box-shadow: currentColor 0px 0px 0px 1px inset;
+        }
+    }
+    
+    .wp-block-page-list {
+        display: flex;
+		list-style-type: inherit;
+        padding-left: 0;
+        margin-block-start: 0;
+        margin-block-end: 0;
+    }
+
+    :is(.has-child-selected, .is-selected) > .gwx-menu-item__subcontent {
+        visibility: visible;
+		overflow: visible;
+		opacity: 1;
+		width: auto;
+		height: auto;
+    }
+}
+
+@import './variations/list/index';
+@import './variations/horizontal-menu/index';
+@import './variations/vertical-menu/index';
+@import './variations/stacked-menu/index';
+@import './variations/accordion/index';

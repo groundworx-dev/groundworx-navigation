@@ -1,0 +1,7 @@
+.wp-block-groundworx-navigation-spacer {
+    &:hover {
+        background-color: currentColor;
+        opacity: .15;
+        outline: 1px dashed color-mix(in srgb, currentColor 40%, transparent);
+    }
+}

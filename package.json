@@ -1,0 +1,31 @@
+{
+  "name": "groundworx-navigation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "wp-scripts start --experimental-modules --webpack-copy-php --progress",
+    "build": "wp-scripts build --experimental-modules --webpack-copy-php --progress",
+    "zip": "zip -r groundworx-navigation.zip . -x \"node_modules/*\" -x \"src/*\" -x \"webpack.config.js\" -x \".babelrc\" -x \"package.json\" -x \"package-lock.json\" -x \".vscode/*\" -x \"README.md\" -x \".gitignore\" -x \".distignore\" -x \".git/*\""
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/groundworx-dev/groundworx-navigation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/groundworx-dev/groundworx-navigation/issues"
+  },
+  "homepage": "https://github.com/groundworx-dev/groundworx-navigation#readme",
+  "devDependencies": {
+    "@wordpress/icons": "^10.24.0",
+    "@wordpress/scripts": "^30.17.0",
+    "sass": "^1.86.3"
+  },
+  "dependencies": {
+    "@groundworx/components": "^1.0.0",
+    "@groundworx/icons": "^1.0.1",
+    "@groundworx/utils": "^1.0.1"
+  }
+}

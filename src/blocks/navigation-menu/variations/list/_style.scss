@@ -1,0 +1,26 @@
+.wp-block-groundworx-navigation-menu.layout-type--list {
+   
+    .gwx-menu__container {
+        display: flex;
+        flex-direction: column;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+    }
+
+    .gwx-menu-item__icon {
+       display: none;
+    }
+    .gwx-menu-item__content,
+    .wp-block-navigation-item__content {
+        padding: 0.5rem 0;
+    }
+
+    .gwx-menu-item__container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .wp-block-navigation-item__content {
+        display: inline-block;
+    }
+}

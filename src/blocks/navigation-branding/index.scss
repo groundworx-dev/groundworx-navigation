@@ -1,0 +1,18 @@
+.wp-block-groundworx-navigation-branding {
+    &:hover {
+        outline: 1px dashed color-mix(in srgb, currentColor 40%, transparent);
+    }
+    > .block-list-appender {
+        position: relative;
+        width: auto;
+        padding: .25rem;
+        .block-editor-button-block-appender {
+            height: unset;
+            padding: 0;
+            line-height: inherit;
+            font-size: inherit;
+            color: currentColor;
+            box-shadow: currentColor 0px 0px 0px 1px inset;
+        }
+    }
+}

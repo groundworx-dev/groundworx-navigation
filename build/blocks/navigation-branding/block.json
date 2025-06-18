@@ -1,0 +1,71 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "groundworx/navigation-branding",
+  "title": "Branding",
+  "description": "Holds the site logo, title, or related branding inside the navigation layout.",
+  "category": "design",
+  "icon": "layout",
+  "parent": [
+    "groundworx/navigation"
+  ],
+  "allowedBlocks": [
+    "core/image",
+    "core/home-link",
+    "core/site-title",
+    "core/site-tagline",
+    "core/site-logo"
+  ],
+  "supports": {
+    "html": false,
+    "reusable": false,
+    "multiple": true,
+    "anchor": false,
+    "color": {
+      "text": false,
+      "background": false
+    },
+    "spacing": {
+      "margin": [
+        "vertical"
+      ],
+      "padding": true,
+      "blockGap": true,
+      "__experimentalDefaultControls": {
+        "margin": true,
+        "padding": true
+      }
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontStyle": true,
+      "__experimentalFontWeight": true,
+      "__experimentalTextTransform": true,
+      "__experimentalFontFamily": true,
+      "__experimentalLetterSpacing": true,
+      "__experimentalTextDecoration": true,
+      "__experimentalWritingMode": true,
+      "__experimentalSkipSerialization": [
+        "textDecoration"
+      ],
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    },
+    "layout": {
+      "default": {
+        "type": "flex"
+      },
+      "allowVerticalAlignment": true,
+      "allowSizingOnChildren": true,
+      "allowEditing": true
+    }
+  },
+  "attributes": {},
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": [
+    "file:./style-index.css"
+  ]
+}

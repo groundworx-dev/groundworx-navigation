@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "groundworx/navigation-spacer",
+	"title": "Spacer",
+	"description": "Spacer used for your navigation",
+	"category": "design",
+	"icon": "screenoptions",
+	"keywords": [ "navigation", "panel", "drawer", "flyouts" ],
+	"parent": [ "groundworx/navigation-menu", "groundworx/navigation-submenu" ],
+	"supports": {
+		"html": false,
+		"reusable": false,
+		"anchor": true,
+		"customClassName": true,
+		"align": false,
+		"ariaLabel": true,
+		"inserter": true,
+		"className": true,
+		"__experimentalSettings": false,
+		"interactivity": true,
+		"renaming": false,
+		"groundworx": {
+			"responsiveLayout": true
+		}
+	},
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": ""
+		},
+		"icon": {
+			"type": "string",
+			"default": ""
+		},
+		"position": {
+			"type": "string",
+			"default": "right"
+		}
+	},
+	"selectors": {
+		"root": ".wp-block-groundworx-navigation-spacer"
+	},
+    "render": "file:./render.php",
+	"editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": [ "file:./style-index.css" ]
+}

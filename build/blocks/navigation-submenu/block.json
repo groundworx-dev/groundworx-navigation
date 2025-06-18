@@ -1,0 +1,77 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "groundworx/navigation-submenu",
+  "title": "Submenu",
+  "description": "Add a submenu to your navigation.",
+  "category": "design",
+  "parent": [
+    "groundworx/menu",
+    "groundworx/navigation-menu",
+    "groundworx/navigation-submenu"
+  ],
+  "textdomain": "default",
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "rel": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number"
+    },
+    "opensInNewTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "url": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "isTopLevelItem": {
+      "type": "boolean"
+    }
+  },
+  "usesContext": [
+    "fontSize",
+    "customFontSize",
+    "showSubmenuIcon",
+    "openSubmenusOnHover",
+    "maxNestingLevel",
+    "style"
+  ],
+  "supports": {
+    "reusable": false,
+    "html": false,
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalFontStyle": true,
+      "__experimentalTextTransform": true,
+      "__experimentalTextDecoration": true,
+      "__experimentalLetterSpacing": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true
+      }
+    },
+    "groundworx": {
+      "responsiveLayout": true
+    },
+    "interactivity": {
+      "clientNavigation": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}

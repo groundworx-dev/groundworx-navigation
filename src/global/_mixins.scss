@@ -1,0 +1,32 @@
+@function resolve-breakpoint($key) {
+  @if map-has-key($breakpoints, $key) {
+    @return map-get($breakpoints, $key);
+  }
+
+  @return $key;
+}
+
+@mixin minScreen($min) {
+  $min-value: resolve-breakpoint($min);
+  @media (min-width: #{$min-value}) {
+    @content;
+  }
+}
+
+@mixin maxScreen($max) {
+  $max-value: resolve-breakpoint($max);
+  @media #{'not all and (min-width: ' + $max-value + ')'} {
+    @content;
+  }
+}
+
+@mixin minMaxScreen($min, $max) {
+  $min-value: resolve-breakpoint($min);
+  $max-value: resolve-breakpoint($max);
+
+  @media (min-width: #{$min-value}) {
+    @media #{'not all and (min-width: ' + $max-value + ')'} {
+      @content;
+    }
+  }
+}

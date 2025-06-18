@@ -1,0 +1,31 @@
+.wp-block-groundworx-navigation-menu.layout-type--stacked-menu {   
+    .block-list-appender {
+        display: flex;
+        align-items: center;
+    }
+    
+    .wp-block-page-list {
+        flex-direction: column;
+    }
+    
+    .gwx-menu-item__content:is(.is-click) {
+        > * {
+            pointer-events: auto;
+        }
+    }
+
+    .wp-block-navigation-item,
+    .gwx-menu-item {
+        &:is(.has-child-selected, .is-selected) {
+            > .gwx-menu-item__subcontent {
+                opacity: 1;
+                visibility: visible;
+
+                width: auto;
+                height: auto;
+                overflow: visible;
+                max-height: 600px;
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+# Dev/build tools
+.babelrc
+webpack.config.js
+
+# Version control
+.git/
+.gitignore
+
+# Editor config
+.vscode/
+
+# Node project files
+node_modules/
+package.json
+package-lock.json
+
+# Source files (already on GitHub)
+src/
+
+# Docs for GitHub, not WP.org
+README.md
+
+# Dist ignore file itself
+.distignore

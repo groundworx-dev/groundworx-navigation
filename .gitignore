@@ -1,0 +1,27 @@
+# Node dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Editor / OS junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+
+# Build artifacts (but keep the build dir itself)
+build/**/*.map
+build/**/*.zip
+build/**/*.tar.gz
+
+# Ignore packaged/archived files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
