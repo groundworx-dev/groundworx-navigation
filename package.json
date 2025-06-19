@@ -5,7 +5,8 @@
   "scripts": {
     "start": "wp-scripts start --experimental-modules --webpack-copy-php --progress",
     "build": "wp-scripts build --experimental-modules --webpack-copy-php --progress",
-    "zip": "zip -r groundworx-navigation.zip . -x \"node_modules/*\" -x \"src/*\" -x \"webpack.config.js\" -x \".babelrc\" -x \"package.json\" -x \"package-lock.json\" -x \".vscode/*\" -x \"README.md\" -x \".gitignore\" -x \".distignore\" -x \".git/*\""
+    "zip": "zip -r groundworx-navigation.zip . -x \"node_modules/*\" -x \"src/*\" -x \"webpack.config.js\" -x \".babelrc\" -x \"package.json\" -x \"package-lock.json\" -x \".vscode/*\" -x \"README.md\" -x \".gitignore\" -x \".distignore\" -x \".git/*\" -x \".DS_Store\""
+
   },
   "browserslist": [
     "defaults"
