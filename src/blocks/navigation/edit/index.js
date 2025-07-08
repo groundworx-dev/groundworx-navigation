@@ -437,7 +437,7 @@ const isNavMenuOpen = useSelect(
 							>
 								<button className="gwx-toggle gwx-toggle--open" 
 									type="button" 
-									aria-label={ __( 'Open menu' ) }
+									aria-label={ __( 'Open menu', 'groundworx-navigation' ) }
 									onClick={() => {
 										if (navMenuBlockId) {
 												selectBlock(navMenuBlockId);
@@ -454,7 +454,7 @@ const isNavMenuOpen = useSelect(
 
 								<button className="gwx-toggle gwx-toggle--close" 
 									type="button" 
-									aria-label={ __( 'Close menu' ) }
+									aria-label={ __( 'Close menu', 'groundworx-navigation' ) }
 									onClick={() => clearSelectedBlock() }
 									aria-pressed={isSelected}
 								> 

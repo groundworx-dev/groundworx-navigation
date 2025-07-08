@@ -92,7 +92,7 @@ body {
         .gwx-navigation__content {
             // content
             display: grid;
-            grid-template-columns: [branding-start] auto [branding-end list-start] 1fr [list-end toggle-start] auto [toggle-end];
+            grid-template-columns: [branding-start] auto [branding-end list-start] minmax(0, 1fr) [list-end toggle-start] auto [toggle-end];
             grid-template-rows: [list-start toggle-start branding-start] minmax(var(--gwx--min-nav-size, 3rem), auto) [branding-end toggle-end list-end];
             gap: 0px;
             .gwx-navigation__menuback {
@@ -164,7 +164,7 @@ body {
         // nav contained
         .gwx-navigation__content {
             // content
-            grid-template-columns: [list-start branding-start] auto [branding-end] 1fr [toggle-start] auto [toggle-end list-end];
+            grid-template-columns: [list-start branding-start] auto [branding-end] minmax(0, 1fr) [toggle-start] auto [toggle-end list-end];
             grid-template-rows: [toggle-start branding-start] minmax(var(--gwx--min-nav-size, 3rem), auto) [branding-end toggle-end list-start] 1fr [list-end];
             row-gap: 0;
             .gwx-navigation__menuback {
@@ -272,7 +272,7 @@ body {
         // nav contained
         .gwx-navigation__content {
             // content
-            grid-template-columns: [ list-start branding-start] auto [branding-end] 1fr [toggle-start] auto [toggle-end list-end];
+            grid-template-columns: [ list-start branding-start] auto [branding-end] minmax(0, 1fr) [toggle-start] auto [toggle-end list-end];
             grid-template-rows: [toggle-start branding-start] minmax(var(--gwx--min-nav-size, 3rem), auto) [branding-end toggle-end list-start] 1fr [list-end];
             .gwx-navigation__menuback {
                 // menu back for drilldown
@@ -361,7 +361,7 @@ body {
         // nav contained
         .gwx-navigation__content {
             // content
-            grid-template-columns: [ list-start branding-start] auto [branding-end] 1fr [toggle-start] auto [toggle-end list-end];
+            grid-template-columns: [ list-start branding-start] auto [branding-end] minmax(0, 1fr) [toggle-start] auto [toggle-end list-end];
             grid-template-rows: [toggle-start branding-start] minmax(var(--gwx--min-nav-size, 3rem), auto) [branding-end toggle-end list-start] 1fr [list-end];
             .gwx-navigation__menuback {
                 // menu back for drilldown

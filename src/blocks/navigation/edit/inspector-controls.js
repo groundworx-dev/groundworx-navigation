@@ -223,7 +223,7 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
     // Rename an existing menu
     const handleRenameMenu = async () => {
         if (!menuId || !renameMenuName.trim()) {
-            return alert(__('Please select a menu and enter a new name.'));
+            return alert(__('Please select a menu and enter a new name.', 'groundworx-navigation'));
         }
 
         setIsRenamingMenu(true);
@@ -242,10 +242,10 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
     // Delete a menu
     const handleDeleteMenu = async () => {
         if (!menuId) {
-            return alert(__('Please select a menu to delete.'));
+            return alert(__('Please select a menu to delete.', 'groundworx-navigation'));
         }
 
-        const confirmDelete = confirm(__('Are you sure you want to delete this menu?'));
+        const confirmDelete = confirm(__('Are you sure you want to delete this menu?', 'groundworx-navigation'));
         if (!confirmDelete) return;
 
         await deleteEntityRecord('postType', 'gwx_menu', menuId);
@@ -269,9 +269,9 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__('Layout Settings')} initialOpen={true}>
+                <PanelBody title={__('Layout Settings', 'groundworx-navigation')} initialOpen={true}>
                     <SelectControl
-                        label={__('Navigation Layout' )}
+                        label={__('Navigation Layout', 'groundworx-navigation' )}
                         value={template}
                         options={getAllowedLayouts(isHeader).map(({ label, name }) => ({
                             label,
@@ -282,7 +282,7 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
                     
                     {behaviorOptions.length > 0 && (
                         <ToggleGroupControl
-                            label={__('Toggle Behavior')}
+                            label={__('Toggle Behavior', 'groundworx-navigation')}
                             value={toggleBehavior}
                             onChange={(val) => setAttributes({ toggleBehavior: val })}
                             isBlock
@@ -295,7 +295,7 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
 
                     {toggleBehavior === 'responsive' && (
                         <ToggleGroupControl
-                            label={__('Toggle up to')}
+                            label={__('Toggle up to', 'groundworx-navigation')}
                             value={switchAt}
                             onChange={(val) => setAttributes({ switchAt: val })}
                             isBlock
@@ -309,7 +309,7 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
                     
                     {toggleBehavior !== false && (
                         <SelectControl
-                            label={__('Display menu as')}
+                            label={__('Display menu as', 'groundworx-navigation')}
                             value={type}
                             onChange={(val) => setAttributes({ type: val })}
                             options={allowedTypes}
@@ -318,7 +318,7 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
 
                     {positionOptions.length > 0 && (
                         <SelectControl
-                            label={__('Position')}
+                            label={__('Position', 'groundworx-navigation')}
                             value={position}
                             onChange={(val) => setAttributes({ position: val })}
                             options={positionOptions}
@@ -327,22 +327,22 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
                     
                     {toType === 'horizontal-menu' && (
                         <ToggleControl
-                            label={__('Open submenus on hover')}
-                            help={__('If disabled, submenus will open on click instead.')}
+                            label={__('Open submenus on hover', 'groundworx-navigation')}
+                            help={__('If disabled, submenus will open on click instead.', 'groundworx-navigation')}
                             checked={!!openSubmenusOnHover}
                             onChange={(val) => setAttributes({ openSubmenusOnHover: val })}
                         />
                     )}
                    
                     <ToggleControl
-                        label={__('Show submenu icon')}
-                        help={__('If disabled, submenus will appear without icon and link will be disabled.')}
+                        label={__('Show submenu icon', 'groundworx-navigation')}
+                        help={__('If disabled, submenus will appear without icon and link will be disabled.', 'groundworx-navigation')}
                         checked={!!showSubmenuIcon}
                         onChange={(val) => setAttributes({ showSubmenuIcon: val })}
                     />
                     
                     <WidthControl
-						label={__('Minimum Size')}
+						label={__('Minimum Size', 'groundworx-navigation')}
 						value={minHeight}
 						onChange={(val) => setAttributes({ minHeight: val })}
 					/>
@@ -350,10 +350,10 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
                 </PanelBody>
                 <PanelBody title="Menu Settings" initialOpen>
                     <SelectControl
-                        label={__('Select Menu')}
+                        label={__('Select Menu', 'groundworx-navigation')}
                         value={menuId || ''}
                         options={[
-                            { label: __('Select a menu'), value: '' },
+                            { label: __('Select a menu', 'groundworx-navigation'), value: '' },
                             ...menus.map((menu) => ({
                                 label: menu.title.rendered,
                                 value: menu.id,
@@ -366,7 +366,7 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
                         isPrimary
                         onClick={handleCreateMenu}
                     >
-                        {__('Create New Menu')}
+                        {__('Create New Menu', 'groundworx-navigation')}
                     </Button>
                 </PanelBody>
             </InspectorControls>
@@ -375,10 +375,10 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
                     <VStack spacing={0}>
                         <TextControl
                             __nextHasNoMarginBottom
-                            label={__('Menu Name')}
+                            label={__('Menu Name', 'groundworx-navigation')}
                             value={renameMenuName}
                             onChange={setRenameMenuName}
-                            placeholder={__('Enter new menu name')}
+                            placeholder={__('Enter new menu name', 'groundworx-navigation')}
                             disabled={!menuId}
                         />
                         <HStack spacing={2}>
@@ -388,8 +388,8 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
                                 disabled={isRenamingMenu || !menuId}
                             >
                                 {isRenamingMenu
-                                    ? __('Renaming...')
-                                    : __('Rename Menu')}
+                                    ? __('Renaming...', 'groundworx-navigation')
+                                    : __('Rename Menu', 'groundworx-navigation')}
                             </Button>
 
                             <Button
@@ -397,7 +397,7 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
                                 onClick={handleDeleteMenu}
                                 disabled={!menuId}
                             >
-                                {__('Delete Menu')}
+                                {__('Delete Menu', 'groundworx-navigation')}
                             </Button>
                         </HStack>
                     </VStack>

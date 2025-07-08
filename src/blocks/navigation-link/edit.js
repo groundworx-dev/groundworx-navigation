@@ -148,23 +148,23 @@ function getMissingText( type ) {
 	switch ( type ) {
 		case 'post':
 			/* translators: label for missing post in navigation link block */
-			missingText = __( 'Select post' );
+			missingText = __( 'Select post', 'groundworx-navigation' );
 			break;
 		case 'page':
 			/* translators: label for missing page in navigation link block */
-			missingText = __( 'Select page' );
+			missingText = __( 'Select page', 'groundworx-navigation' );
 			break;
 		case 'category':
 			/* translators: label for missing category in navigation link block */
-			missingText = __( 'Select category' );
+			missingText = __( 'Select category', 'groundworx-navigation' );
 			break;
 		case 'tag':
 			/* translators: label for missing tag in navigation link block */
-			missingText = __( 'Select tag' );
+			missingText = __( 'Select tag', 'groundworx-navigation' );
 			break;
 		default:
 			/* translators: label for missing values in navigation link block */
-			missingText = __( 'Add link' );
+			missingText = __( 'Add link', 'groundworx-navigation' );
 	}
 
 	return missingText;
@@ -178,17 +178,17 @@ function getMissingText( type ) {
 function Controls( { attributes, setAttributes, setIsLabelFieldFocused } ) {
 	const { label, url, description, rel } = attributes;
 	return (
-		<ToolsPanel label={ __( 'Settings' ) }>
+		<ToolsPanel label={ __( 'Settings', 'groundworx-navigation' ) }>
 			<ToolsPanelItem
 				hasValue={ () => !! label }
-				label={ __( 'Text' ) }
+				label={ __( 'Text', 'groundworx-navigation' ) }
 				onDeselect={ () => setAttributes( { label: '' } ) }
 				isShownByDefault
 			>
 				<TextControl
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __( 'Text' ) }
+					label={ __( 'Text', 'groundworx-navigation' ) }
 					value={ label ? stripHTML( label ) : '' }
 					onChange={ ( labelValue ) => {
 						setAttributes( { label: labelValue } );
@@ -201,14 +201,14 @@ function Controls( { attributes, setAttributes, setIsLabelFieldFocused } ) {
 
 			<ToolsPanelItem
 				hasValue={ () => !! url }
-				label={ __( 'Link' ) }
+				label={ __( 'Link', 'groundworx-navigation' ) }
 				onDeselect={ () => setAttributes( { url: '' } ) }
 				isShownByDefault
 			>
 				<TextControl
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __( 'Link' ) }
+					label={ __( 'Link', 'groundworx-navigation' ) }
 					value={ url ? safeDecodeURI( url ) : '' }
 					onChange={ ( urlValue ) => {
 						updateAttributes(
@@ -224,40 +224,40 @@ function Controls( { attributes, setAttributes, setIsLabelFieldFocused } ) {
 
 			<ToolsPanelItem
 				hasValue={ () => !! description }
-				label={ __( 'Description' ) }
+				label={ __( 'Description', 'groundworx-navigation' ) }
 				onDeselect={ () => setAttributes( { description: '' } ) }
 				isShownByDefault
 			>
 				<TextareaControl
 					__nextHasNoMarginBottom
-					label={ __( 'Description' ) }
+					label={ __( 'Description', 'groundworx-navigation' ) }
 					value={ description || '' }
 					onChange={ ( descriptionValue ) => {
 						setAttributes( { description: descriptionValue } );
 					} }
 					help={ __(
-						'The description will be displayed in the menu if the current theme supports it.'
+						'The description will be displayed in the menu if the current theme supports it.', 'groundworx-navigation'
 					) }
 				/>
 			</ToolsPanelItem>
 
 			<ToolsPanelItem
 				hasValue={ () => !! rel }
-				label={ __( 'Rel attribute' ) }
+				label={ __( 'Rel attribute', 'groundworx-navigation' ) }
 				onDeselect={ () => setAttributes( { rel: '' } ) }
 				isShownByDefault
 			>
 				<TextControl
 					__nextHasNoMarginBottom
 					__next40pxDefaultSize
-					label={ __( 'Rel attribute' ) }
+					label={ __( 'Rel attribute', 'groundworx-navigation' ) }
 					value={ rel || '' }
 					onChange={ ( relValue ) => {
 						setAttributes( { rel: relValue } );
 					} }
 					autoComplete="off"
 					help={ __(
-						'The relationship of the linked URL as space-separated link types.'
+						'The relationship of the linked URL as space-separated link types.', 'groundworx-navigation'
 					) }
 				/>
 			</ToolsPanelItem>
@@ -294,7 +294,7 @@ export default function NavigationLinkEdit( props ) {
 	const [ popoverAnchor, setPopoverAnchor ] = useState( null );
 	const listItemRef = useRef( null );
 	const isDraggingWithin = useIsDraggingWithin( listItemRef );
-	const itemLabelPlaceholder = __( 'Add label…' );
+	const itemLabelPlaceholder = __( 'Add label…', 'groundworx-navigation' );
 	const ref = useRef();
 	const linkUIref = useRef();
 	const prevUrl = usePrevious( url );
@@ -490,7 +490,7 @@ export default function NavigationLinkEdit( props ) {
 	const missingText = getMissingText( type );
 	/* translators: Whether the navigation link is Invalid or a Draft. */
 	const placeholderText = `(${
-		isInvalid ? __( 'Invalid' ) : __( 'Draft' )
+		isInvalid ? __( 'Invalid', 'groundworx-navigation' ) : __( 'Draft', 'groundworx-navigation' )
 	})`;
 
 
@@ -501,7 +501,7 @@ export default function NavigationLinkEdit( props ) {
 					<ToolbarButton
 						name="link"
 						icon={ linkIcon }
-						title={ __( 'Link' ) }
+						title={ __( 'Link', 'groundworx-navigation' ) }
 						shortcut={ displayShortcut.primary( 'k' ) }
 						onClick={ ( event ) => {
 							setIsLinkOpen( true );
@@ -512,7 +512,7 @@ export default function NavigationLinkEdit( props ) {
 						<ToolbarButton
 							name="submenu"
 							icon={ addSubmenu }
-							title={ __( 'Add submenu' ) }
+							title={ __( 'Add submenu', 'groundworx-navigation' ) }
 							onClick={ transformToSubmenu }
 						/>
 					) }
@@ -561,7 +561,7 @@ export default function NavigationLinkEdit( props ) {
 												)
 											}
 											aria-label={ __(
-												'Navigation link text'
+												'Navigation link text', 'groundworx-navigation'
 											) }
 											placeholder={ itemLabelPlaceholder }
 											withoutInteractiveFormatting

@@ -47,14 +47,14 @@ const LinkColorTabs = ({
 	const tabs = [
 		{
 			key: 'link',
-			label: __('Default'),
+			label: __('Default', 'groundworx-navigation'),
 			colorValue: linkColor?.color ?? '',
 			inheritedValue: linkColor?.color ?? '',
 			setValue: setLinkColor,
 		},
 		{
 			key: 'hover',
-			label: __('Hover'),
+			label: __('Hover', 'groundworx-navigation'),
 			colorValue: hoverLinkColor?.color ?? '',
 			inheritedValue: hoverLinkColor?.color ?? '',
 			setValue: setHoverLinkColor,
@@ -118,7 +118,7 @@ const LinkColorTabs = ({
 										icon={resetIcon}
 										className="block-editor-panel-color-gradient-settings__reset"
 										size="small"
-										label={__('Reset')}
+										label={__('Reset', 'groundworx-navigation')}
 										onClick={() => {
 											resetValue();
 											if (isOpen) onToggle();
@@ -194,7 +194,7 @@ export default function ColorTools({
 				settings={ [
 					{
 						colorValue: textColor.color,
-						label: `${label} ${__( 'Text' )}`,
+						label: `${label} ${__( 'Text', 'groundworx-navigation' )}`,
 						onColorChange: setTextColor,
 						resetAllFilter: () => setTextColor(),
 						clearable: true,
@@ -202,7 +202,7 @@ export default function ColorTools({
 					},
 					{
 						colorValue: backgroundColor.color,
-						label: `${label} ${__( 'Background' )}`,
+						label: `${label} ${__( 'Background', 'groundworx-navigation' )}`,
 						onColorChange: setBackgroundColor,
 						resetAllFilter: () => setBackgroundColor(),
 						clearable: true,
@@ -215,7 +215,7 @@ export default function ColorTools({
 				disableCustomGradients
 			/>
             <LinkColorTabs
-				label= { `${label} ${__( 'Link' )}` }
+				label= { `${label} ${__( 'Link', 'groundworx-navigation' )}` }
 				hasValue={ () => Boolean(linkColor?.color || hoverLinkColor?.color) }
                 linkColor={ linkColor }
                 setLinkColor={ setLinkColor }

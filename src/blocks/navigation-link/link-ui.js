@@ -87,10 +87,10 @@ function LinkUIBlockInserter( { clientId, onBack } ) {
 			ref={ focusOnMountRef }
 		>
 			<VisuallyHidden>
-				<h2 id={ dialogTitleId }>{ __( 'Add block' ) }</h2>
+				<h2 id={ dialogTitleId }>{ __( 'Add block', 'groundworx-navigation' ) }</h2>
 
 				<p id={ dialogDescriptionId }>
-					{ __( 'Choose a block to add to your Navigation.' ) }
+					{ __( 'Choose a block to add to your Navigation.', 'groundworx-navigation' ) }
 				</p>
 			</VisuallyHidden>
 
@@ -103,7 +103,7 @@ function LinkUIBlockInserter( { clientId, onBack } ) {
 				} }
 				size="small"
 			>
-				{ __( 'Back' ) }
+				{ __( 'Back', 'groundworx-navigation' ) }
 			</Button>
 
 			<CustomQuickInserter
@@ -190,11 +190,11 @@ function UnforwardedLinkUI( props, ref ) {
 					aria-describedby={ dialogDescriptionId }
 				>
 					<VisuallyHidden>
-						<h2 id={ dialogTitleId }>{ __( 'Add link' ) }</h2>
+						<h2 id={ dialogTitleId }>{ __( 'Add link', 'groundworx-navigation' ) }</h2>
 
 						<p id={ dialogDescriptionId }>
 							{ __(
-								'Search for and add a link to your Navigation.'
+								'Search for and add a link to your Navigation.', 'groundworx-navigation'
 							) }
 						</p>
 					</VisuallyHidden>
@@ -211,12 +211,12 @@ function UnforwardedLinkUI( props, ref ) {
 							if ( type === 'post' ) {
 								/* translators: %s: search term. */
 								format = __(
-									'Create draft post: <mark>%s</mark>'
+									'Create draft post: <mark>%s</mark>', 'groundworx-navigation'
 								);
 							} else {
 								/* translators: %s: search term. */
 								format = __(
-									'Create draft page: <mark>%s</mark>'
+									'Create draft page: <mark>%s</mark>', 'groundworx-navigation'
 								);
 							}
 
@@ -286,7 +286,7 @@ const LinkUITools = ( { setAddingBlock, focusAddBlockButton } ) => {
 				} }
 				aria-haspopup={ blockInserterAriaRole }
 			>
-				{ __( 'Add block' ) }
+				{ __( 'Add block', 'groundworx-navigation' ) }
 			</Button>
 		</VStack>
 	);

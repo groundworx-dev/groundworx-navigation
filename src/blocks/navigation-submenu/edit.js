@@ -124,7 +124,7 @@ export default function NavigationSubmenuEdit( {
 	const [ popoverAnchor, setPopoverAnchor ] = useState( null );
 	const listItemRef = useRef( null );
 	const isDraggingWithin = useIsDraggingWithin( listItemRef );
-	const itemLabelPlaceholder = __( 'Add text…' );
+	const itemLabelPlaceholder = __( 'Add text…', 'groundworx-navigation' );
 	const ref = useRef();
 
 	const {
@@ -316,7 +316,7 @@ export default function NavigationSubmenuEdit( {
 					<ToolbarButton
 						name="link"
 						icon={ linkIcon }
-						title={ __( 'Link' ) }
+						title={ __( 'Link', 'groundworx-navigation' ) }
 						shortcut={ displayShortcut.primary( 'k' ) }
 						onClick={ ( event ) => {
 							setIsLinkOpen( true );
@@ -327,7 +327,7 @@ export default function NavigationSubmenuEdit( {
 					<ToolbarButton
 						name="revert"
 						icon={ removeSubmenu }
-						title={ __( 'Convert to Link' ) }
+						title={ __( 'Convert to Link', 'groundworx-navigation' ) }
 						onClick={ transformToLink }
 						className="gwx-menu__submenu__revert"
 						disabled={ ! canConvertToLink }
@@ -337,7 +337,7 @@ export default function NavigationSubmenuEdit( {
 			{ /* Warning, this duplicated in packages/block-library/src/menu-link/edit.js */ }
 			<InspectorControls>
 				<ToolsPanel
-					label={ __( 'Settings' ) }
+					label={ __( 'Settings', 'groundworx-navigation' ) }
 					resetAll={ () => {
 						setAttributes( {
 							label: '',
@@ -348,7 +348,7 @@ export default function NavigationSubmenuEdit( {
 					} }
 				>
 					<ToolsPanelItem
-						label={ __( 'Text' ) }
+						label={ __( 'Text', 'groundworx-navigation' ) }
 						isShownByDefault
 						hasValue={ () => !! label }
 						onDeselect={ () => setAttributes( { label: '' } ) }
@@ -360,13 +360,13 @@ export default function NavigationSubmenuEdit( {
 							onChange={ ( labelValue ) => {
 								setAttributes( { label: labelValue } );
 							} }
-							label={ __( 'Text' ) }
+							label={ __( 'Text', 'groundworx-navigation' ) }
 							autoComplete="off"
 						/>
 					</ToolsPanelItem>
 
 					<ToolsPanelItem
-						label={ __( 'Link' ) }
+						label={ __( 'Link', 'groundworx-navigation' ) }
 						isShownByDefault
 						hasValue={ () => !! url }
 						onDeselect={ () => setAttributes( { url: '' } ) }
@@ -378,14 +378,14 @@ export default function NavigationSubmenuEdit( {
 							onChange={ ( urlValue ) => {
 								setAttributes( { url: urlValue } );
 							} }
-							label={ __( 'Link' ) }
+							label={ __( 'Link', 'groundworx-navigation' ) }
 							autoComplete="off"
 							type="url"
 						/>
 					</ToolsPanelItem>
 
 					<ToolsPanelItem
-						label={ __( 'Description' ) }
+						label={ __( 'Description', 'groundworx-navigation' ) }
 						isShownByDefault
 						hasValue={ () => !! description }
 						onDeselect={ () =>
@@ -400,15 +400,15 @@ export default function NavigationSubmenuEdit( {
 									description: descriptionValue,
 								} );
 							} }
-							label={ __( 'Description' ) }
+							label={ __( 'Description', 'groundworx-navigation' ) }
 							help={ __(
-								'The description will be displayed in the menu if the current theme supports it.'
+								'The description will be displayed in the menu if the current theme supports it.', 'groundworx-navigation'
 							) }
 						/>
 					</ToolsPanelItem>
 
 					<ToolsPanelItem
-						label={ __( 'Rel attribute' ) }
+						label={ __( 'Rel attribute', 'groundworx-navigation' ) }
 						isShownByDefault
 						hasValue={ () => !! rel }
 						onDeselect={ () => setAttributes( { rel: '' } ) }
@@ -420,10 +420,10 @@ export default function NavigationSubmenuEdit( {
 							onChange={ ( relValue ) => {
 								setAttributes( { rel: relValue } );
 							} }
-							label={ __( 'Rel attribute' ) }
+							label={ __( 'Rel attribute', 'groundworx-navigation' ) }
 							autoComplete="off"
 							help={ __(
-								'The relationship of the linked URL as space-separated link types.'
+								'The relationship of the linked URL as space-separated link types.', 'groundworx-navigation'
 							) }
 						/>
 					</ToolsPanelItem>
@@ -444,7 +444,7 @@ export default function NavigationSubmenuEdit( {
 						}
 						onMerge={ mergeBlocks }
 						onReplace={ onReplace }
-						aria-label={ __( 'Navigation link text' ) }
+						aria-label={ __( 'Navigation link text', 'groundworx-navigation' ) }
 						placeholder={ itemLabelPlaceholder }
 						withoutInteractiveFormatting
 						onClick={ () => {

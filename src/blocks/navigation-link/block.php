@@ -11,21 +11,21 @@ defined( 'ABSPATH' ) || exit;
  * Registers the `groundworx/navigation-link` block on server.
  */
 
-function register_block_groundworx_menu_link() {
+function gwx_navigation_register_block_menu_link() {
 	register_block_type_from_metadata(
 		__DIR__,
 		array(
-			'render_callback' => 'render_block_groundworx_menu_link',
+			'render_callback' => 'gwx_navigation_render_block_menu_link',
 		)
 	);
 }
-add_action( 'init', 'register_block_groundworx_menu_link' );
+add_action( 'init', 'gwx_navigation_register_block_menu_link' );
 
 /**
  * Render callback for `groundworx/navigation-link` block.
  */
 
-function render_block_groundworx_menu_link( $attributes, $content, $block ) {
+function gwx_navigation_render_block_menu_link( $attributes, $content, $block ) {
 	if ( empty( $attributes['url'] ) || empty( $attributes['label'] ) ) {
 		return '';
 	}

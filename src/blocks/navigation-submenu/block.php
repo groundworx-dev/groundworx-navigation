@@ -1,24 +1,26 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-function register_block_groundworx_menu_submenu() {
+function gwx_navigation_register_block_menu_submenu() {
 	register_block_type_from_metadata(
 		__DIR__,
 		array(
-			'render_callback' => 'render_block_groundworx_menu_submenu',
+			'render_callback' => 'gwx_navigation_render_block_menu_submenu',
 		)
 	);
 }
-add_action( 'init', 'register_block_groundworx_menu_submenu' );
+add_action( 'init', 'gwx_navigation_register_block_menu_submenu' );
 
 
-function render_block_groundworx_menu_submenu( $attributes, $content, $block ) {
+function gwx_navigation_render_block_menu_submenu( $attributes, $content, $block ) {
 	if ( empty( $attributes['label'] ) ) {
 		return '';
 	}
 
 	$label = wp_kses_post( $attributes['label'] );
-	$aria_label = sprintf( __( '%s submenu' ), wp_strip_all_tags( $label ) );
+	// translators: %s is the menu item label.
+	$aria_label = sprintf( __( '%s submenu', 'groundworx-navigation' ), wp_strip_all_tags( $label ) );
+
 	$has_submenu = count( $block->inner_blocks ) > 0;
 
 	$show_submenu_indicators = isset( $block->context['showSubmenuIcon'] ) && $block->context['showSubmenuIcon'];

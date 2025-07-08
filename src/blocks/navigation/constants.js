@@ -1,86 +1,88 @@
+import { __ } from '@wordpress/i18n';
+
 export const layoutTemplates = [
 	{
 		name: 'modal',
-		label: 'Modal',
+		label: __('Modal', 'groundworx-navigation'),
 		positionOptions: [
-			{ label: 'Fixed', value: 'fixed', isDefault: true },
-			{ label: 'Scroll Up Reveal', value: 'scroll-up-reveal' }
+			{ label: __('Fixed', 'groundworx-navigation'), value: 'fixed', isDefault: true },
+			{ label: __('Scroll Up Reveal', 'groundworx-navigation'), value: 'scroll-up-reveal' }
 		],
 		behaviorOptions: [
-			{ label: 'Responsive', value: 'responsive', isDefault: true },
-			{ label: 'Always', value: true },
+			{ label: __('Responsive', 'groundworx-navigation'), value: 'responsive', isDefault: true },
+			{ label: __('Always', 'groundworx-navigation'), value: true },
 		],
 		allowedTypes: [
-			{ label: 'Accordion', value: 'accordion', isDefault: true },
-			{ label: 'Vertical Menu', value: 'vertical-menu' },
-			{ label: 'Stacked Menu', value: 'stacked-menu' },
-			{ label: 'List', value: 'list' },
+			{ label: __('Accordion', 'groundworx-navigation'), value: 'accordion', isDefault: true },
+			{ label: __('Vertical Menu', 'groundworx-navigation'), value: 'vertical-menu' },
+			{ label: __('Stacked Menu', 'groundworx-navigation'), value: 'stacked-menu' },
+			{ label: __('List', 'groundworx-navigation'), value: 'list' },
 		],
 		allowedToTypes: [
-			{ label: 'Horizontal Menu', value: 'horizontal-menu', isDefault: true },
+			{ label: __('Horizontal Menu', 'groundworx-navigation'), value: 'horizontal-menu', isDefault: true },
 		],
 	},
 	{
 		name: 'modal-dropdown',
-		label: 'Modal Dropdown',
+		label: __('Modal Dropdown', 'groundworx-navigation'),
 		positionOptions: [
-			{ label: 'Relative', value: 'relative', isDefault: true },
-			{ label: 'Sticky', value: 'sticky' },
-			{ label: 'Fixed', value: 'fixed', isDefault: true },
-			{ label: 'Scroll Up Reveal', value: 'scroll-up-reveal' }
+			{ label: __('Relative', 'groundworx-navigation'), value: 'relative', isDefault: true },
+			{ label: __('Sticky', 'groundworx-navigation'), value: 'sticky' },
+			{ label: __('Fixed', 'groundworx-navigation'), value: 'fixed', isDefault: true },
+			{ label: __('Scroll Up Reveal', 'groundworx-navigation'), value: 'scroll-up-reveal' }
 		],
 		behaviorOptions: [
-			{ label: 'Responsive', value: 'responsive', isDefault: true },
-			{ label: 'Always', value: true },
+			{ label: __('Responsive', 'groundworx-navigation'), value: 'responsive', isDefault: true },
+			{ label: __('Always', 'groundworx-navigation'), value: true },
 		],
 		allowedTypes: [
-			{ label: 'Accordion', value: 'accordion', isDefault: true },
-			{ label: 'Vertical Menu', value: 'vertical-menu' },
-			{ label: 'Stacked Menu', value: 'stacked-menu' },
-			{ label: 'List', value: 'list' },
+			{ label: __('Accordion', 'groundworx-navigation'), value: 'accordion', isDefault: true },
+			{ label: __('Vertical Menu', 'groundworx-navigation'), value: 'vertical-menu' },
+			{ label: __('Stacked Menu', 'groundworx-navigation'), value: 'stacked-menu' },
+			{ label: __('List', 'groundworx-navigation'), value: 'list' },
 		],
 		allowedToTypes: [
-			{ label: 'Horizontal Menu', value: 'horizontal-menu', isDefault: true },
+			{ label: __('Horizontal Menu', 'groundworx-navigation'), value: 'horizontal-menu', isDefault: true },
 		],
 	},
 	{
 		name: 'slide-in',
-		label: 'Slide In',
+		label: __('Slide In', 'groundworx-navigation'),
 		positionOptions: [
-			{ label: 'Fixed', value: 'fixed', isDefault: true }
+			{ label: __('Fixed', 'groundworx-navigation'), value: 'fixed', isDefault: true }
 		],
 		behaviorOptions: [
-			{ label: 'Responsive', value: 'responsive', isDefault: true }
+			{ label: __('Responsive', 'groundworx-navigation'), value: 'responsive', isDefault: true }
 		],
 		allowedTypes: [
-			{ label: 'Accordion', value: 'accordion', isDefault: true },
-			{ label: 'Vertical Menu', value: 'vertical-menu' },
-			{ label: 'Stacked Menu', value: 'stacked-menu' },
-			{ label: 'List', value: 'list' },
+			{ label: __('Accordion', 'groundworx-navigation'), value: 'accordion', isDefault: true },
+			{ label: __('Vertical Menu', 'groundworx-navigation'), value: 'vertical-menu' },
+			{ label: __('Stacked Menu', 'groundworx-navigation'), value: 'stacked-menu' },
+			{ label: __('List', 'groundworx-navigation'), value: 'list' },
 		],
 		allowedToTypes: [],
 	},
 	{
 		name: 'classic',
-		label: 'Classic',
+		label: __('Classic', 'groundworx-navigation'),
 		positionOptions: [
-			{ label: 'Relative', value: 'relative', isDefault: true },
-			{ label: 'Sticky', value: 'sticky' },
-			{ label: 'Fixed', value: 'fixed', isDefault: true },
-			{ label: 'Scroll Up Reveal', value: 'scroll-up-reveal' }
+			{ label: __('Relative', 'groundworx-navigation'), value: 'relative', isDefault: true },
+			{ label: __('Sticky', 'groundworx-navigation'), value: 'sticky' },
+			{ label: __('Fixed', 'groundworx-navigation'), value: 'fixed', isDefault: true },
+			{ label: __('Scroll Up Reveal', 'groundworx-navigation'), value: 'scroll-up-reveal' }
 		],
 		behaviorOptions: [
-			{ label: 'Responsive', value: 'responsive' },
-			{ label: 'Always', value: true },
+			{ label: __('Responsive', 'groundworx-navigation'), value: 'responsive' },
+			{ label: __('Always', 'groundworx-navigation'), value: true },
 		],
 		allowedTypes: [
-			{ label: 'Accordion', value: 'accordion', isDefault: true },
-			{ label: 'Vertical Menu', value: 'vertical-menu' },
-			{ label: 'Stacked Menu', value: 'stacked-menu' },
-			{ label: 'List', value: 'list' },
+			{ label: __('Accordion', 'groundworx-navigation'), value: 'accordion', isDefault: true },
+			{ label: __('Vertical Menu', 'groundworx-navigation'), value: 'vertical-menu' },
+			{ label: __('Stacked Menu', 'groundworx-navigation'), value: 'stacked-menu' },
+			{ label: __('List', 'groundworx-navigation'), value: 'list' },
 		],
 		allowedToTypes: [
-			{ label: 'Horizontal Menu', value: 'horizontal-menu', isDefault: true },
+			{ label: __('Horizontal Menu', 'groundworx-navigation'), value: 'horizontal-menu', isDefault: true },
 		],
 	}
 ];

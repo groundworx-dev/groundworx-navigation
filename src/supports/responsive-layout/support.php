@@ -1,5 +1,7 @@
 <?php
-class GroundworxResponsiveLayoutSupport {
+defined( 'ABSPATH' ) || exit;
+
+class GWXResponsiveLayoutSupport {
 	public function __construct() {
 		add_filter( 'render_block', [ $this, 'render_block' ], 10, 2 );
 	}
@@ -75,4 +77,4 @@ class GroundworxResponsiveLayoutSupport {
 }
 
 // Initialize it
-new GroundworxResponsiveLayoutSupport();
+new GWXResponsiveLayoutSupport();

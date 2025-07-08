@@ -15,7 +15,7 @@ const ResponsiveLayoutPanel = ({ attributes, setAttributes, clientId, orientatio
 	const { mode = 'fit', value = '', unit = 'px' } = responsiveSize;
 
 	const isHeight = orientation === 'vertical';
-	const label = isHeight ? __('Height') : __('Width');
+	const label = isHeight ? __('Height', 'groundworx-navigation') : __('Width', 'groundworx-navigation');
 
 	const units = ['px', '%', 'em'];
 
@@ -77,14 +77,14 @@ const ResponsiveLayoutPanel = ({ attributes, setAttributes, clientId, orientatio
 					value={mode}
 					onChange={setMode}
 				>
-					<ToggleGroupControlOption value="fit" label={__('Fit')} />
-					<ToggleGroupControlOption value="grow" label={__('Grow')} />
-					<ToggleGroupControlOption value="fixed" label={__('Fixed')} />
+					<ToggleGroupControlOption value="fit" label={__('Fit', 'groundworx-navigation')} />
+					<ToggleGroupControlOption value="grow" label={__('Grow', 'groundworx-navigation')} />
+					<ToggleGroupControlOption value="fixed" label={__('Fixed', 'groundworx-navigation')} />
 				</ToggleGroupControl>
 
 				{mode === 'fixed' && (
 					<WidthControl
-						label={sprintf(__('Specify a fixed %s.'), isHeight ? 'height' : 'width')}
+						label={sprintf(__('Specify a fixed %s.', 'groundworx-navigation'), isHeight ? 'height' : 'width')}
 						value={value}
 						onChange={setSize}
 					/>

@@ -24,7 +24,7 @@ const ManageMenusButton = ( {
 				post_type: 'gwx_menu',
 			} ) }
 		>
-			{ __( 'Manage menus' ) }
+			{ __( 'Manage menus', 'groundworx-navigation' ) }
 		</ComponentName>
 	);
 };

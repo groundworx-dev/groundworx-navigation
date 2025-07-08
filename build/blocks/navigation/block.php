@@ -4,17 +4,17 @@ defined( 'ABSPATH' ) || exit;
 require_once GROUNDWORX_NAVIGATION_PLUGIN_DIR . '/inc/icons.php';
 require_once GROUNDWORX_NAVIGATION_PLUGIN_DIR . '/inc/utils.php';
 
-function register_block_groundworx_navigation() {
+function gwx_navigation_register_block_navigation() {
 	register_block_type_from_metadata(
 		__DIR__,
 		array(
-			'render_callback' => array( 'Groundworx_Navigation_Block_Renderer', 'render' ),
+			'render_callback' => array( 'GWXNavigationBlockRenderer', 'render' ),
 		)
 	);
 }
-add_action( 'init', 'register_block_groundworx_navigation' );
+add_action( 'init', 'gwx_navigation_register_block_navigation' );
 
-class Groundworx_Navigation_Block_Renderer {
+class GWXNavigationBlockRenderer {
 
 	private static $seen_menu_names = array();
 
@@ -206,7 +206,7 @@ class Groundworx_Navigation_Block_Renderer {
 								aria-controls="%1$s"
 								data-wp-on-async--click="actions.openMenuOnClick" 
 								data-wp-on--keydown="actions.handleMenuKeydown"
-								data-wp-bind--aria-hidden ="state.isMenuOpen"
+								data-wp-bind--inert="state.isMenuOpen"
 								>
 								%5$s
 							</button>
@@ -216,7 +216,8 @@ class Groundworx_Navigation_Block_Renderer {
 								aria-label="%4$s"
 								aria-controls="%1$s"
 								data-wp-on-async--click="actions.closeMenuOnClick" 
-								data-wp-bind--aria-hidden ="!state.isMenuOpen"
+								data-wp-bind--inert="!state.isMenuOpen"
+								tabindex="-1"
 								>
 								%5$s
 							</button>
@@ -228,8 +229,8 @@ class Groundworx_Navigation_Block_Renderer {
 			',
 			esc_attr( $modal_unique_id ),
 			$inner_blocks_html,
-			__( 'Open menu' ),
-			__( 'Close menu' ),
+			__( 'Open menu', 'groundworx-navigation' ),
+			__( 'Close menu', 'groundworx-navigation' ),
 			'<svg class="gwx-toggle__bread" width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
 				<rect class="gwx-toggle__bread-top" x="4" y="7.5" width="16" height="1.5" />
 				<rect class="gwx-toggle__bread-middle" x="4" y="11.25" width="16" height="1.5"></rect>
@@ -367,9 +368,9 @@ class Groundworx_Navigation_Block_Renderer {
 			'shouldSwitchLayout' => false,
 			'type'          => 'overlay',
 			'roleAttribute' => '',
-			'ariaLabel'     => __( 'Navigation' ),
-			'ariaLabelOpened'     => __( 'Close Menu' ),
-			'ariaLabelClosed'     => __( 'Open Menu' ),
+			'ariaLabel'     => __( 'Navigation', 'groundworx-navigation' ),
+			'ariaLabelOpened'     => __( 'Close Menu', 'groundworx-navigation' ),
+			'ariaLabelClosed'     => __( 'Open Menu', 'groundworx-navigation' ),
 		];
 
 		if ( $switch_at && $enable_modal === 'responsive' ) {

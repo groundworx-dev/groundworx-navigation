@@ -3,17 +3,18 @@ defined( 'ABSPATH' ) || exit;
 
 require_once GROUNDWORX_NAVIGATION_PLUGIN_DIR . '/inc/utils.php';
 
-function register_block_groundworx_navigation_menu() {
+function gwx_navigation_register_block_navigation_menu() {
 	register_block_type_from_metadata(
 		__DIR__,
 		array(
-			'render_callback' => array( 'Groundworx_Navigation_Menu_Block_Renderer', 'render' ),
+			'render_callback' => array( 'GWXNavigationMenuBlockRenderer', 'render' ),
 		)
 	);
 }
-add_action( 'init', 'register_block_groundworx_navigation_menu' );
 
-class Groundworx_Navigation_Menu_Block_Renderer {
+add_action( 'init', 'gwx_navigation_register_block_navigation_menu' );
+
+class GWXNavigationMenuBlockRenderer {
 	private static $has_submenus = false;
 
 	private static $needs_list_item_wrapper = array(
@@ -372,7 +373,7 @@ class Groundworx_Navigation_Menu_Block_Renderer {
 			'shouldSwitchLayout' => false,
 			'type'          => 'submenu',
 			'roleAttribute' => '',
-			'ariaLabel'     => __( 'Menu' ),
+			'ariaLabel'     => __( 'Menu', 'groundworx-navigation' ),
 		];
 
 		// Generate context string first
@@ -435,8 +436,20 @@ class Groundworx_Navigation_Menu_Block_Renderer {
 			)
 		) ) {
 			// Add directives to the parent `<li>`.
-			$tags->set_attribute( 'data-wp-interactive', 'groundworx/navigation' );
-			$tags->set_attribute( 'data-wp-context', '{ "submenuOpenedBy": { "click": false, "hover": false, "focus": false }, "type": "submenu", "modal": null, "shouldAlignRight": false, "previousFocus": null }' );
+			$tags->set_attribute( 'data-wp-interactive', 'groundworx/navigation' );			
+			$context = array(
+				'submenuOpenedBy' => array(
+					'click' => false,
+					'hover' => false,
+					'focus' => false,
+				),
+				'type' => 'submenu',
+				'modal' => null,
+				'shouldAlignRight' => false,
+				'previousFocus' => null
+			);
+			$tags->set_attribute( 'data-wp-context', wp_json_encode( $context ) );
+
 			$tags->set_attribute( 'data-wp-watch', 'callbacks.initMenu' );
 			$tags->set_attribute( 'data-wp-on--focusout', 'actions.handleMenuFocusout' );
 			$tags->set_attribute( 'data-wp-on--keydown', 'actions.handleMenuKeydown' );
