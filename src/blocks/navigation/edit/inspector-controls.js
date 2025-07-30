@@ -11,7 +11,7 @@ import ManageMenusButton from './../../navigation-menu/edit/manage-menus-button'
 import useNavigationMenu from './../../navigation-menu/use-navigation-menu';
 
 import { getLayoutConfig, layoutTemplates } from './../constants.js';
-import { getEditorCanvasWidth } from './../utils.js';
+import { getEditorCanvasWidth, getEditorCanvasElement } from './../utils.js';
 
 import { getBreakpoints } from '@groundworx/utils';
 import { WidthControl } from '@groundworx/components';
@@ -82,27 +82,27 @@ const MenuInspectorControls = ({ clientId, menuId, setMenuId, attributes, setAtt
     const { saveEntityRecord, deleteEntityRecord } = useDispatch('core');
 
     useEffect(() => {
-        if (!toType || !switchAt) {
-            setShouldSwitchLayout(false);
-            return;
-        }
+        if (toggleBehavior === true) {
+			setShouldSwitchLayout(false);
+			return;
+		}
 
-        const updateLayoutSwitch = () => {
-            const canvasWidth = getEditorCanvasWidth();
-            const switchAtBreakpoint = getBreakpoints.resolve(attributes.switchAt);
-            
-            setShouldSwitchLayout(canvasWidth >= switchAtBreakpoint);
-        };
+		const updateLayoutSwitch = () => {
+			const canvasWidth = getEditorCanvasWidth();
+			const resolved = getBreakpoints.resolve(switchAt);
+			setShouldSwitchLayout(canvasWidth >= resolved);
+		};
 
-        updateLayoutSwitch();
+		updateLayoutSwitch();
 
-        const resizeObserver = new ResizeObserver(updateLayoutSwitch);
-        const iframe = document.querySelector('iframe[name="editor-canvas"]');
-        if (iframe?.contentDocument?.body) {
-            resizeObserver.observe(iframe.contentDocument.body);
-        }
+		const resizeObserver = new ResizeObserver(updateLayoutSwitch);
+		const target = getEditorCanvasElement();
 
-        return () => resizeObserver.disconnect();
+		if (target) {
+			resizeObserver.observe(target);
+		}
+
+		return () => resizeObserver.disconnect();
     }, [toType, switchAt]);
 
     

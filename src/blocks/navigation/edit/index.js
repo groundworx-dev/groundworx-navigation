@@ -10,7 +10,7 @@ import { getBreakpoints } from '@groundworx/utils';
 
 import ColorTools from './color-tools';
 import MenuInspectorControls from './inspector-controls';
-import { getColorCSSVar, getEditorCanvasWidth } from './../utils.js';
+import { getColorCSSVar, getEditorCanvasWidth, getEditorCanvasElement } from './../utils.js';
 
 const ALLOWED_BLOCKS = [
 	'groundworx/navigation-branding',
@@ -177,14 +177,13 @@ function Edit(props) {
 	};
 
 	useEffect(() => {
-		if ( toggleBehavior === true ) {
+		if (toggleBehavior === true) {
 			setShouldSwitchLayout(false);
 			return;
 		}
 
 		const updateLayoutSwitch = () => {
 			const canvasWidth = getEditorCanvasWidth();
-			
 			const resolved = getBreakpoints.resolve(switchAt);
 			setShouldSwitchLayout(canvasWidth >= resolved);
 		};
@@ -192,12 +191,14 @@ function Edit(props) {
 		updateLayoutSwitch();
 
 		const resizeObserver = new ResizeObserver(updateLayoutSwitch);
-		const iframe = document.querySelector('iframe[name="editor-canvas"]');
-		if (iframe?.contentDocument?.body) {
-			resizeObserver.observe(iframe.contentDocument.body);
+		const target = getEditorCanvasElement();
+
+		if (target) {
+			resizeObserver.observe(target);
 		}
 
 		return () => resizeObserver.disconnect();
+
 	}, [switchAt, toggleBehavior]);
 
 	const blockProps = useBlockProps({
