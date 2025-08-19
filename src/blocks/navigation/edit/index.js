@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { store as blockEditorStore, BlockControls, InspectorControls, useBlockProps, useInnerBlocksProps, withColors } from '@wordpress/block-editor';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { useCallback, useEffect, useState, useRef } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 import { createBlock } from '@wordpress/blocks';
 import { plus } from '@wordpress/icons';
 import { getBreakpoints } from '@groundworx/utils';
@@ -52,11 +52,8 @@ function Edit(props) {
         customPlaceholder: CustomPlaceholder = null,
         __unstableLayoutClassNames: layoutClassNames } = props;
 	const {
-		ref, 
 		template,
 		switchAt,
-		type,
-		toType,
 		position,
 		minHeight,
 		toggleBehavior,
@@ -71,10 +68,7 @@ function Edit(props) {
 		const updateNavBounds = () => {
 			const rect = ref.getBoundingClientRect();
 
-			const iframe = document.querySelector('iframe[name="editor-canvas"]');
-			const rootContainer = iframe?.contentDocument?.querySelector(
-				'.is-root-container.wp-site-blocks.block-editor-block-list__layout'
-			);
+			const rootContainer = getEditorCanvasElement();
 
 			if (!rootContainer) return;
 			const style = rootContainer.style;
@@ -85,12 +79,10 @@ function Edit(props) {
 			style.removeProperty('--gwx-nav-left-width');
 			style.removeProperty('--gwx-nav-right-width');
 
-			const { innerWidth: vw, innerHeight: vh } = iframe.contentWindow;
-
 			const distTop = Math.abs(rect.top);
-			const distBottom = Math.abs(vh - rect.bottom);
+			const distBottom = Math.abs(rect.height - rect.bottom);
 			const distLeft = Math.abs(rect.left);
-			const distRight = Math.abs(vw - rect.right);
+			const distRight = Math.abs(rect.width - rect.right);
 
 			const touchesLeft = distLeft <= 1;
 			const touchesRight = distRight <= 1;
@@ -148,24 +140,6 @@ function Edit(props) {
 		[clientId]
 	);
 
-	const { menus, isMenuLoading } = useSelect((select) => {
-		const coreDataStore = select('core');
-
-		return {
-			menus: coreDataStore.getEntityRecords('postType', 'gwx_menu', { per_page: -1 }) || [],
-			isMenuLoading: coreDataStore.isResolving('core', 'getEntityRecords', ['postType', 'gwx_menu']),
-		};
-	}, []);
-
-
-	const handleUpdateMenu = useCallback(
-		(newRef) => {
-			setAttributes({ ref: newRef });
-		},
-		[setAttributes]
-	);
-
-
     const [shouldSwitchLayout, setShouldSwitchLayout] = useState(false);
 
 	const shouldOpenModal = hasChildSelected;
@@ -207,7 +181,7 @@ function Edit(props) {
 			className,
 			getEditorLayoutClasses(attributes, shouldSwitchLayout, shouldOpenModal),
 			{
-				'is-responsive': toType,
+				'is-responsive': toggleBehavior,
 				'has-text-color': !! textColor.color || !! textColor?.class,
 				'has-background': !! backgroundColor.color || backgroundColor.class,
 			},
@@ -282,8 +256,6 @@ function Edit(props) {
 	
 	function getEditorLayoutClasses(attributes, shouldSwitchLayout, shouldOpenModal ) {
 		const {
-			type,
-			toType,
 			toggleBehavior,
 			position,
 		} = attributes;
@@ -394,7 +366,7 @@ const isNavMenuOpen = useSelect(
 						clientId={ clientId }
 						navRef={ navRef }
 					/>
-					{ toType === 'horizontal-menu' && (
+					{ toggleBehavior === 'horizontal-menu' && (
 					<ColorTools
 						label= "Submenu"
 						textColor={ submenuTextColor }
@@ -414,11 +386,6 @@ const isNavMenuOpen = useSelect(
 				</InspectorControls>
 				<MenuInspectorControls
 					clientId={clientId}
-					menuId={ref}
-					setMenuId={handleUpdateMenu}
-					menus={menus}
-					name={name}
-					isLoading={isMenuLoading}
 					attributes={attributes}
 					setAttributes={setAttributes}
 				/>

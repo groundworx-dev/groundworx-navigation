@@ -25,9 +25,46 @@
 		"renaming": false
     },
    "attributes": {
+		"ref": {
+			"type": "number"
+		},
+		"type": {
+			"type": "string",
+			"enum": [
+				"list",
+				"horizontal-menu",
+				"vertical-menu",
+				"stacked-menu",
+				"accordion"
+			],
+			"default": "vertical-menu"
+		},
+		"toType": {
+			"type": "string",
+			"enum": [
+				"",
+				"list",
+				"horizontal-menu",
+				"vertical-menu",
+				"stacked-menu",
+				"accordion"
+			]
+		},
+		"showSubmenuIcon": {
+			"type": "boolean",
+			"default": true
+		},
+		"openSubmenusOnHover": {
+			"type": "boolean",
+			"default": true
+		},
 		"templateLock": {
 			"type": [ "string", "boolean" ],
 			"enum": [ "all", "insert", "contentOnly", false ]
+		},
+		"maxNestingLevel": {
+			"type": "number",
+			"default": 5
 		},
 		"layout": {
 			"type": "object",
@@ -43,18 +80,19 @@
 		}
 	},
 	"providesContext": {
-		"responsiveLayout": "responsiveLayout"
+		"responsiveLayout": "responsiveLayout",
+		"maxNestingLevel": "maxNestingLevel",
+		"type": "type",
+		"toType": "toType",
+		"showSubmenuIcon": "showSubmenuIcon",
+		"openSubmenusOnHover": "openSubmenusOnHover"
 	},
 	"usesContext": [
 		"fontSize",
 		"customFontSize",
-		"showSubmenuIcon",
-		"maxNestingLevel",
-		"openSubmenusOnHover",
-		"ref",
-		"type",
-		"toType",
 		"switchAt",
+		"template",
+		"toggleBehavior",
 		"style"
 	],
 	"selectors": {

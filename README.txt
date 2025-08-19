@@ -8,7 +8,7 @@ GitHub URI: https://github.com/groundworx-dev/groundworx-navigation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,11 @@ Groundworx Navigation relies on WordPress’s **block-theme framework** (theme.j
 
 
 == Changelog ==
+
+= 1.0.2 =
+* Improved UX
+* Fixed issue where sometimes menu would not open
+* Fixed editing behavior bug
 
 = 1.0.1 =
 * Fix: Adjusted editor canvas width detection for iframe-less block editor in WordPress 6.8+

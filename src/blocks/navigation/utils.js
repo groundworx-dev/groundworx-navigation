@@ -3,6 +3,11 @@ export function getEditorCanvasWidth() {
 	return el?.getBoundingClientRect?.().width || window.innerWidth;
 }
 
+export function getEditorCanvasHeight() {
+	const el = getEditorCanvasElement();
+	return el?.getBoundingClientRect?.().height || window.innerHeight;
+}
+
 export function getEditorCanvasElement() {
 	const iframe = document.querySelector('iframe[name="editor-canvas"]');
 	if (iframe?.contentDocument?.body) return iframe.contentDocument.body;
@@ -26,4 +31,9 @@ export function getColorCSSVar(attribute, customAttribute, varName) {
 		return { [varName]: customAttribute };
 	}
 	return {};
+}
+
+export function getValidOrDefault(current, options, fallback = '') {
+	if (options.find(opt => opt.value === current)) return current;
+	return options.find(opt => opt.isDefault)?.value || options?.[0]?.value || fallback;
 }

@@ -140,7 +140,7 @@ class GWXNavigationBlockRenderer {
 
 	private static function is_interactive( $attributes, $inner_blocks ) {
 		$is_responsive_menu = static::is_responsive( $attributes );
-		return ( $attributes['showSubmenuIcon'] ) || $is_responsive_menu;
+		return $is_responsive_menu;
 	}
 
 	private static function is_responsive( $attributes ) {
@@ -206,7 +206,6 @@ class GWXNavigationBlockRenderer {
 								aria-controls="%1$s"
 								data-wp-on-async--click="actions.openMenuOnClick" 
 								data-wp-on--keydown="actions.handleMenuKeydown"
-								data-wp-bind--inert="state.isMenuOpen"
 								>
 								%5$s
 							</button>
@@ -216,7 +215,6 @@ class GWXNavigationBlockRenderer {
 								aria-label="%4$s"
 								aria-controls="%1$s"
 								data-wp-on-async--click="actions.closeMenuOnClick" 
-								data-wp-bind--inert="!state.isMenuOpen"
 								tabindex="-1"
 								>
 								%5$s

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Groundworx Navigation
  * Description: Responsive Gutenberg navigation for theme.json ready themes. Modal, dropdown, slide-in & hamburger. Supporting: accordion, stacked, list, vertical, and horizontal.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Plugin URI: https://wordpress.org/plugins/groundworx-navigation
  * Requires at least: 6.5
  * Tested up to: 6.8
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'GROUNDWORX_NAVIGATION_VERSION', '1.0.0' );
+define( 'GROUNDWORX_NAVIGATION_VERSION', '1.0.2' );
 define( 'GROUNDWORX_NAVIGATION_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GROUNDWORX_NAVIGATION_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
