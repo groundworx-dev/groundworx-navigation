@@ -8,7 +8,7 @@ GitHub URI: https://github.com/groundworx-dev/groundworx-navigation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.2
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,10 @@ Groundworx Navigation relies on WordPress’s **block-theme framework** (theme.j
 
 
 == Changelog ==
+
+= 1.0.3 =
+* Fixed editor icon display issue (now hidden when SVG is used)
+* General stability and performance improvements
 
 = 1.0.2 =
 * Improved UX

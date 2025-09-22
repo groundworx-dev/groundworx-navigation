@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Groundworx Navigation
  * Description: Responsive Gutenberg navigation for theme.json ready themes. Modal, dropdown, slide-in & hamburger. Supporting: accordion, stacked, list, vertical, and horizontal.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Plugin URI: https://wordpress.org/plugins/groundworx-navigation
  * Requires at least: 6.5
  * Tested up to: 6.8
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'GROUNDWORX_NAVIGATION_VERSION', '1.0.2' );
+define( 'GROUNDWORX_NAVIGATION_VERSION', '1.0.3' );
 define( 'GROUNDWORX_NAVIGATION_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GROUNDWORX_NAVIGATION_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -74,15 +74,6 @@ class Groundworx_Navigation_Loader {
         add_action( 'enqueue_block_editor_assets', [__CLASS__, 'supports_enqueue_editor_scripts'], 101 );
         add_action( 'enqueue_block_assets', [__CLASS__, 'supports_enqueue_all_styles'], 101 );
         add_action( 'enqueue_block_assets', [__CLASS__, 'supports_enqueue_scripts'], 101 );
-
-        // Warn if the theme is not block-based.
-        if ( !wp_is_block_theme() ) {
-            add_action( 'admin_notices', function () {
-                echo '<div class="notice notice-warning"><p>';
-                echo esc_html__( 'Groundworx Menu requires Gutenberg to function properly.', 'groundworx-navigation' );
-                echo '</p></div>';
-            });
-        }
     }
 
     function get_plugin_version() {
@@ -189,9 +180,9 @@ class Groundworx_Navigation_Loader {
                 // translators: %s: singular post type label
                 'edit_item'               => sprintf( __( 'Edit %s', 'groundworx-navigation' ), $singular ),
                 // translators: %s: singular post type label
-                'view_item'               => sprintf( __( 'View %s', 'groundworx-navigation' ), $singular ),
+                'view_item'               => sprintf( esc_html_x( 'View %s', 'singular post type label', 'groundworx-navigation' ), esc_html( $singular ) ),
                 // translators: %s: plural post type label
-                'view_items'              => sprintf( __( 'View %s', 'groundworx-navigation' ), $plural ),
+                'view_items'              => sprintf( esc_html_x( 'View %s', 'plural post type label', 'groundworx-navigation' ), esc_html( $plural ) ),
                 // translators: %s: plural post type label (lowercase)
                 'search_items'            => sprintf( __( 'Search %s', 'groundworx-navigation' ), $plural ),
                 // translators: %s: plural post type label (lowercase)
@@ -258,6 +249,9 @@ class Groundworx_Navigation_Loader {
 
         $permalink = get_permalink($post);
 
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Only used to display admin message, no action taken.
+        $revision = isset( $_GET['revision'] ) ? absint( $_GET['revision'] ) : 0;
+
         $post_type_object = get_post_type_object( self::$post_type );
 
         $messages[self::$post_type] = array(
@@ -274,12 +268,12 @@ class Groundworx_Navigation_Loader {
             4 => sprintf(__('%s updated.', 'groundworx-navigation'), 
                 $post_type_object->labels->singular_name
             ),
-            5 => isset( $_GET['revision'] ) ? (
+            5 => isset( $revision ) ? (
                 sprintf(
                     // translators: 1: post type singular label, 2: date of revision
                     __( '%1$s restored to revision from %2$s', 'groundworx-navigation' ),
                     $post_type_object->labels->singular_name,
-                    wp_post_revision_title( absint( $_GET['revision'] ), false ) // sanitize
+                    wp_post_revision_title( $revision, false ) // sanitize
                 )
             ) : false,
             // translators: 1: post type singular label, 2: permalink, 3: view link label.
@@ -415,7 +409,7 @@ class Groundworx_Navigation_Loader {
             plugins_url( '/build/view.js', __FILE__ ),
             $asset['dependencies'] ?? [],
             $asset['version'] ?? false,
-            true
+            array( 'in_footer' => true )
         );
     }
 
