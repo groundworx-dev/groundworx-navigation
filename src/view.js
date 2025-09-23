@@ -132,7 +132,8 @@ const { actions, state } = store('groundworx/navigation', {
 				bodyStyle.removeProperty('--gwx-nav-left-width');
 				bodyStyle.removeProperty('--gwx-nav-right-width');
 
-				const { innerWidth: vw, innerHeight: vh } = window;
+				const vw = document.documentElement.clientWidth;
+				const vh = document.documentElement.clientHeight;
 
 				const distTop = Math.abs(rect.top);
 				const distBottom = Math.abs(vh - rect.bottom);
@@ -143,7 +144,6 @@ const { actions, state } = store('groundworx/navigation', {
 				const touchesRight = distRight <= 1;
 				const touchesTop = distTop <= 50;
 				const touchesBottom = distBottom <= 1;
-				
 				if (touchesLeft && touchesRight) {
 					// Horizontal bar
 					if (touchesBottom) {

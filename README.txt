@@ -8,7 +8,7 @@ GitHub URI: https://github.com/groundworx-dev/groundworx-navigation
 Requires at least: 6.5
 Tested up to: 6.8
 Requires PHP: 8.2
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,11 @@ Groundworx Navigation relies on WordPress’s **block-theme framework** (theme.j
 
 == Changelog ==
 
+= 1.0.4 =
+- Fix: geometry mismatch when OS is set to “Always show scroll bars” could mis-detect nav bounds.
+- Improve: no layout shift when locking body; close button no longer jumps.
+- Improve: optional menu scrollbar styling.
+
 = 1.0.3 =
 * Fixed editor icon display issue (now hidden when SVG is used)
 * General stability and performance improvements
@@ -104,5 +109,5 @@ Groundworx Navigation relies on WordPress’s **block-theme framework** (theme.j
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-First stable release. Install or update for responsive modal, slide-in, and classic hamburger navigation layouts.
+= 1.0.4 =
+Fixes a layout bug when the OS is set to “Always show scroll bars,” which could mis-detect nav bounds and cause layout shifts. Recommended for all users. After updating, hard refresh and ensure page zoom is 100%.

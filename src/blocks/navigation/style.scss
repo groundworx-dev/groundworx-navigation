@@ -683,3 +683,28 @@ body {
         }
     }
 }
+
+.wp-block-groundworx-navigation {
+    .gwx-navigation__wrapper {
+        // nav contained
+        .gwx-navigation__content {           
+            .gwx-navigation__modal {
+                // wrapper for menu                
+                > .wp-block-groundworx-navigation-menu {
+                    scrollbar-color: var(--grx--color--menu--text, var(--wp--preset--color--contrast, #343434)) var(--grx--color--menu--background, var(--wp--preset--color--base, #ffffff));
+                    &::-webkit-scrollbar { 
+                        width: 12px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        background: var(--grx--color--menu--background, var(--wp--preset--color--base, #ffffff));
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: var(--grx--color--menu--text, var(--wp--preset--color--contrast, #343434));
+                        border-radius: 999px;
+                        border: 3px solid var(--grx--color--menu--background, var(--wp--preset--color--base, #ffffff)); // creates spacing
+                    }
+                 }
+            }
+        }
+    }
+}
