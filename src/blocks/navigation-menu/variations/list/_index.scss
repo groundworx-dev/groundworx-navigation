@@ -1,5 +1,5 @@
 .wp-block-groundworx-navigation-menu.layout-type--list {
-    .gwx-menu__container, .gwx-menu-item__container {
+    :where(.gwx-menu__container, .gwx-menu-item__container) {
         display: block;
         list-style-type: disc;
         padding-inline-start: 40px;

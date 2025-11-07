@@ -155,10 +155,32 @@
             @include gwx-icon--chevron;
         }
     }
+
+    // No Indent
+    &:not(.is-indent) .gwx-menu-item__container {
+        padding-left: 0px;
+    }
+    // Show children under parent and disable icon
+    &.is-flatten .gwx-menu-item__container {
+        .gwx-menu-item {
+            display: block;
+            visibility: visible;
+        }
+        .gwx-menu-item__icon {
+            display: none;
+        }
+        .gwx-menu-item__subcontent {
+            display: contents;
+            .gwx-menu-item__container {
+                display: contents;
+            }
+        }
+    }
+   
 }
 
 @import './variations/list/style';
 @import './variations/horizontal-menu/style';
 @import './variations/vertical-menu/style';
-@import './variations/stacked-menu/style';
+@import './variations/accordion-alt/style';
 @import './variations/accordion/style';

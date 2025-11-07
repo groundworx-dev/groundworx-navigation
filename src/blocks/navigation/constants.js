@@ -14,8 +14,8 @@ export const layoutTemplates = [
 		],
 		allowedTypes: [
 			{ label: __('Accordion', 'groundworx-navigation'), value: 'accordion', isDefault: true },
+			{ label: __('Accordion Alt', 'groundworx-navigation'), value: 'accordion-alt' },
 			{ label: __('Vertical Menu', 'groundworx-navigation'), value: 'vertical-menu' },
-			{ label: __('Stacked Menu', 'groundworx-navigation'), value: 'stacked-menu' },
 			{ label: __('List', 'groundworx-navigation'), value: 'list' },
 		],
 		allowedToTypes: [
@@ -37,8 +37,8 @@ export const layoutTemplates = [
 		],
 		allowedTypes: [
 			{ label: __('Accordion', 'groundworx-navigation'), value: 'accordion', isDefault: true },
+			{ label: __('Accordion Alt', 'groundworx-navigation'), value: 'accordion-alt' },
 			{ label: __('Vertical Menu', 'groundworx-navigation'), value: 'vertical-menu' },
-			{ label: __('Stacked Menu', 'groundworx-navigation'), value: 'stacked-menu' },
 			{ label: __('List', 'groundworx-navigation'), value: 'list' },
 		],
 		allowedToTypes: [
@@ -56,8 +56,8 @@ export const layoutTemplates = [
 		],
 		allowedTypes: [
 			{ label: __('Accordion', 'groundworx-navigation'), value: 'accordion', isDefault: true },
+			{ label: __('Accordion Alt', 'groundworx-navigation'), value: 'accordion-alt' },
 			{ label: __('Vertical Menu', 'groundworx-navigation'), value: 'vertical-menu' },
-			{ label: __('Stacked Menu', 'groundworx-navigation'), value: 'stacked-menu' },
 			{ label: __('List', 'groundworx-navigation'), value: 'list' },
 		],
 		allowedToTypes: [],
@@ -77,8 +77,8 @@ export const layoutTemplates = [
 		],
 		allowedTypes: [
 			{ label: __('Accordion', 'groundworx-navigation'), value: 'accordion', isDefault: true },
+			{ label: __('Accordion Alt', 'groundworx-navigation'), value: 'accordion-alt' },
 			{ label: __('Vertical Menu', 'groundworx-navigation'), value: 'vertical-menu' },
-			{ label: __('Stacked Menu', 'groundworx-navigation'), value: 'stacked-menu' },
 			{ label: __('List', 'groundworx-navigation'), value: 'list' },
 		],
 		allowedToTypes: [

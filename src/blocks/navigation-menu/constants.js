@@ -31,7 +31,7 @@ export const menuTemplates = [
 	{ name: 'accordion', label: 'Accordion', type: 'accordion', direction: 'vertical' },
 	{ name: 'list', label: 'List', type: 'list', direction: 'vertical' },
 	{ name: 'vertical-menu', label: 'Vertical Menu', type: 'menu', direction: 'vertical' },
-	{ name: 'stacked-menu', label: 'Stacked Menu', type: 'menu', direction: 'vertical' },
+	{ name: 'accordion-alt', label: 'Accordion Alt', type: 'menu', direction: 'vertical' },
 	{ name: 'horizontal-menu', label: 'Horizontal Menu', type: 'menu', direction: 'horizontal' }
 ];
 

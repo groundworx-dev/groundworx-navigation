@@ -313,13 +313,22 @@ class GWXNavigationMenuBlockRenderer {
 		$text_decoration       = $attributes['style']['typography']['textDecoration'] ?? null;
 		$text_decoration_class = sprintf( 'has-text-decoration-%s', $text_decoration );
 		$layout_type		   = $attributes['type'] ?? 'list';
+		$submenu_flatten	   = $attributes['flattenSubmenu'] ?? false;
+		$submenu_indent		   = $attributes['indentSubmenu'] ?? false;
+
 		$layout_type_class = sprintf( 'layout-type--%s', $layout_type );
+
+		$submenu_flatten_class = 'is-flatten';
+		$submenu_indent_class = 'is-indent';
+
 		$position_class = ( ! empty( $attributes['menuPosition'] ) ) ? ['is-position-' . sanitize_title( $attributes['menuPosition'] )] : [];
 
 		$classes = array_merge(
 			array('gwx-menu'),
 			$font_sizes['css_classes'],
 			$position_class,
+			$submenu_flatten ? array($submenu_flatten_class) : array(),
+			$submenu_indent ? array($submenu_indent_class) : array(),
 			$layout_type ? array($layout_type_class) : array(),
 			$text_decoration ? array( $text_decoration_class ) : array()
 		);
@@ -518,7 +527,6 @@ class GWXNavigationMenuBlockRenderer {
 		}
 		return $tags->get_updated_html();
 	}
-
 
 	public static function render( $attributes, $content, $block ) {
 		$context   = isset( $block->context ) && is_array( $block->context ) ? $block->context : [];

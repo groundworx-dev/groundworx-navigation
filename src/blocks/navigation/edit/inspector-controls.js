@@ -7,7 +7,7 @@ import { useSelect } from '@wordpress/data';
 import { useEntityProp } from '@wordpress/core-data';
 
 import { getLayoutConfig, layoutTemplates } from './../constants.js';
-import { getEditorCanvasWidth, getEditorCanvasElement, getValidOrDefault } from './../utils.js';
+import { getEditorCanvasWidth, getEditorCanvasElement, useResponsiveLayout, getValidOrDefault } from './../utils.js';
 
 import { getBreakpoints } from '@groundworx/utils';
 import { WidthControl } from '@groundworx/components';
@@ -61,34 +61,9 @@ const MenuInspectorControls = ({ clientId, attributes, setAttributes }) => {
         );
     }
 
-    const [shouldSwitchLayout, setShouldSwitchLayout] = useState(false);
-
-    useEffect(() => {
-        if (toggleBehavior === true) {
-			setShouldSwitchLayout(false);
-			return;
-		}
-
-		const updateLayoutSwitch = () => {
-			const canvasWidth = getEditorCanvasWidth();
-			const resolved = getBreakpoints.resolve(switchAt);
-			setShouldSwitchLayout(canvasWidth >= resolved);
-		};
-
-		updateLayoutSwitch();
-
-		const resizeObserver = new ResizeObserver(updateLayoutSwitch);
-		const target = getEditorCanvasElement();
-
-		if (target) {
-			resizeObserver.observe(target);
-		}
-
-		return () => resizeObserver.disconnect();
-    }, [switchAt]);
-
+    const shouldSwitchLayout = useResponsiveLayout(toggleBehavior, switchAt);
     
-    useEffect(() => {
+    useEffect(() => {   
         const config = getLayoutConfig(template);
 
         const resolvedToggleBehavior = getValidOrDefault(toggleBehavior, config.behaviorOptions, false);
@@ -125,7 +100,7 @@ const MenuInspectorControls = ({ clientId, attributes, setAttributes }) => {
         if (changed) {
             setAttributes(next);
         }
-    }, [template, toggleBehavior, position]);
+    }, [template]);
 
     useEffect(() => {
         const allowedTemplates = getAllowedLayouts(isHeader);

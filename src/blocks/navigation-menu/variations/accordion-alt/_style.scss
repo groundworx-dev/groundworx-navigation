@@ -1,3 +1,4 @@
+.wp-block-groundworx-navigation-menu.layout-type--accordion-alt,
 .wp-block-groundworx-navigation-menu.layout-type--stacked-menu {
     display: flex;
     flex-direction: column;
@@ -14,10 +15,15 @@
     }
 
     .gwx-menu-item__container {
-        padding: 0;
         display: flex;
         flex-direction: column;
-        padding: .5rem 0 .5rem 20px;
+    }
+    
+    :where(.gwx-menu-item__container) {
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        padding-right: 0;
+        padding-left: 20px;
     }
 
     .gwx-menu-item, .wp-block-navigation-item {

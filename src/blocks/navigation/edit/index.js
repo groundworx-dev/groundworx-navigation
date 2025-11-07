@@ -10,7 +10,7 @@ import { getBreakpoints } from '@groundworx/utils';
 
 import ColorTools from './color-tools';
 import MenuInspectorControls from './inspector-controls';
-import { getColorCSSVar, getEditorCanvasWidth, getEditorCanvasElement } from './../utils.js';
+import { getColorCSSVar, getEditorCanvasWidth, useResponsiveLayout, getEditorCanvasElement } from './../utils.js';
 
 const ALLOWED_BLOCKS = [
 	'groundworx/navigation-branding',
@@ -112,6 +112,10 @@ function Edit(props) {
 		});
 
 		window.addEventListener('resize', updateNavBounds);
+
+		ref._navBoundsCleanup = () => {
+			window.removeEventListener('resize', updateNavBounds);
+		};
 	}
 
 	const { hasChildSelected } = useSelect(
@@ -140,7 +144,7 @@ function Edit(props) {
 		[clientId]
 	);
 
-    const [shouldSwitchLayout, setShouldSwitchLayout] = useState(false);
+	const shouldSwitchLayout = useResponsiveLayout(toggleBehavior, switchAt);
 
 	const shouldOpenModal = hasChildSelected;
 
@@ -149,31 +153,6 @@ function Edit(props) {
 		const newBlock = createBlock(blockName);
 		insertBlocks(newBlock, undefined, clientId);
 	};
-
-	useEffect(() => {
-		if (toggleBehavior === true) {
-			setShouldSwitchLayout(false);
-			return;
-		}
-
-		const updateLayoutSwitch = () => {
-			const canvasWidth = getEditorCanvasWidth();
-			const resolved = getBreakpoints.resolve(switchAt);
-			setShouldSwitchLayout(canvasWidth >= resolved);
-		};
-
-		updateLayoutSwitch();
-
-		const resizeObserver = new ResizeObserver(updateLayoutSwitch);
-		const target = getEditorCanvasElement();
-
-		if (target) {
-			resizeObserver.observe(target);
-		}
-
-		return () => resizeObserver.disconnect();
-
-	}, [switchAt, toggleBehavior]);
 
 	const blockProps = useBlockProps({
 		ref: navRef, 
@@ -312,6 +291,12 @@ function Edit(props) {
 	if (navRef.current) {
 		measureNavBoundsForEditor(navRef.current);
 	}
+
+	return () => {
+        if (navRef.current?._navBoundsCleanup) {
+            navRef.current._navBoundsCleanup();
+        }
+    };
 }, []);
 
 const isNavMenuOpen = useSelect(

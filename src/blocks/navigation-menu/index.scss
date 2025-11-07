@@ -34,10 +34,13 @@
 		width: auto;
 		height: auto;
     }
+    &:not(.is-indent) .gwx-menu-item__container {
+        padding-inline-start: 0px;
+    }
 }
 
 @import './variations/list/index';
 @import './variations/horizontal-menu/index';
 @import './variations/vertical-menu/index';
-@import './variations/stacked-menu/index';
+@import './variations/accordion-alt/index';
 @import './variations/accordion/index';

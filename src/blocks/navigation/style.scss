@@ -50,7 +50,6 @@ body {
 	top: calc(var(--grx--nav-push, 0px) + var(--gwx-nav-top-height, 0px));
 	z-index: 1;
     &.has-modal-open {
-        position: fixed;
         top: var(--grx--nav-push, 0px);
         left: 0;
         right: 0;

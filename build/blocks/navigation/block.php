@@ -286,7 +286,7 @@ class GWXNavigationBlockRenderer {
 	private static function get_styles( $attributes ) {
 		$colors       = static::build_css_colors( $attributes );
 		$min_height	  = static::get_min_height_styles( $attributes );
-		$font_sizes   = block_core_navigation_build_css_font_sizes( $attributes );
+		$font_sizes   = static::build_css_font_sizes( $attributes );
 		$block_styles = isset( $attributes['styles'] ) ? $attributes['styles'] : '';
 		return $block_styles . $colors['inline_styles']. $min_height . $font_sizes['inline_styles'];
 	}
@@ -294,7 +294,7 @@ class GWXNavigationBlockRenderer {
 	private static function get_classes( $attributes ) {
 		// Restore legacy classnames for submenu positioning.
 		$colors             = static::build_css_colors( $attributes );
-		$font_sizes         = block_core_navigation_build_css_font_sizes( $attributes );
+		$font_sizes         = static::build_css_font_sizes( $attributes );
 
 		// Manually add block support text decoration as CSS class.
 		$text_decoration       = $attributes['style']['typography']['textDecoration'] ?? null;
@@ -432,6 +432,27 @@ class GWXNavigationBlockRenderer {
 		if ( static::is_interactive( $attributes, $inner_blocks ) ) {
 			wp_enqueue_script_module( 'groundworx-navigation-view' );
 		}
+	}
+
+	public static function build_css_font_sizes( $attributes ) {
+		// CSS classes.
+		$font_sizes = array(
+			'css_classes'   => array(),
+			'inline_styles' => '',
+		);
+
+		$has_named_font_size  = array_key_exists( 'fontSize', $attributes );
+		$has_custom_font_size = array_key_exists( 'customFontSize', $attributes );
+
+		if ( $has_named_font_size ) {
+			// Add the font size class.
+			$font_sizes['css_classes'][] = sprintf( 'has-%s-font-size', $attributes['fontSize'] );
+		} elseif ( $has_custom_font_size ) {
+			// Add the custom font size inline style.
+			$font_sizes['inline_styles'] = sprintf( 'font-size: %spx;', $attributes['customFontSize'] );
+		}
+
+		return $font_sizes;
 	}
 
 	public static function render( $attributes, $content, $block ) {

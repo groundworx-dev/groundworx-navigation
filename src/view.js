@@ -122,18 +122,31 @@ const { actions, state } = store('groundworx/navigation', {
 			const { ref } = getElement();
 			if (!ref || ref._navBoundsInit) return;
 
-			const updateNavBounds = () => {
-				const rect = ref.getBoundingClientRect();
-				const bodyStyle = document.body.style;
+			const MIN_MEASURE_VW = 300;
 
-				// Clear all existing vars
+			const clearVars = () => {
+				const bodyStyle = document.body.style;
 				bodyStyle.removeProperty('--gwx-nav-top-height');
 				bodyStyle.removeProperty('--gwx-nav-bottom-height');
 				bodyStyle.removeProperty('--gwx-nav-left-width');
 				bodyStyle.removeProperty('--gwx-nav-right-width');
+			};
 
+			const updateNavBounds = () => {
 				const vw = document.documentElement.clientWidth;
 				const vh = document.documentElement.clientHeight;
+
+				// If too small, don't measure — and make sure we clear previous values.
+				if (vw < MIN_MEASURE_VW) {
+					clearVars();
+					return;
+				}
+
+				const rect = ref.getBoundingClientRect();
+				const bodyStyle = document.body.style;
+
+				// Reset before setting
+				clearVars();
 
 				const distTop = Math.abs(rect.top);
 				const distBottom = Math.abs(vh - rect.bottom);
@@ -144,6 +157,7 @@ const { actions, state } = store('groundworx/navigation', {
 				const touchesRight = distRight <= 1;
 				const touchesTop = distTop <= 50;
 				const touchesBottom = distBottom <= 1;
+
 				if (touchesLeft && touchesRight) {
 					// Horizontal bar
 					if (touchesBottom) {
@@ -160,16 +174,19 @@ const { actions, state } = store('groundworx/navigation', {
 						bodyStyle.setProperty('--gwx-nav-right-width', `${rect.width}px`);
 					}
 				}
-				
-			}
+			};
+
 			ref._navBoundsInit = true;
 
+			// Defer initial measure; guard will handle small viewports
 			requestAnimationFrame(() => {
 				requestAnimationFrame(updateNavBounds);
 			});
 
+			// Re-measure on resize; guard keeps it no-op under 300px
 			window.addEventListener('resize', updateNavBounds);
 		}
+
 	},
 	actions: {
 		checkViewport() {

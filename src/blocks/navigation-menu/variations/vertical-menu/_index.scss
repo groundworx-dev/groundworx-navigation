@@ -7,7 +7,7 @@
         unicode-bidi: isolate;
     }
 
-    .gwx-menu-item__container {
+    :where(.gwx-menu-item__container) {
         padding-inline-start: 40px;
     }
 

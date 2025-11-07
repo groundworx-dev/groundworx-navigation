@@ -17,9 +17,6 @@
     "groundworx/navigation-spacer",
     "core/page-list"
   ],
-  "parent": [
-    "groundworx/navigation"
-  ],
   "supports": {
     "anchor": true,
     "ariaLabel": true,
@@ -40,7 +37,7 @@
         "list",
         "horizontal-menu",
         "vertical-menu",
-        "stacked-menu",
+        "accordion-alt",
         "accordion"
       ],
       "default": "vertical-menu"
@@ -52,7 +49,7 @@
         "list",
         "horizontal-menu",
         "vertical-menu",
-        "stacked-menu",
+        "accordion-alt",
         "accordion"
       ]
     },
@@ -75,6 +72,14 @@
         "contentOnly",
         false
       ]
+    },
+    "indentSubmenu": {
+      "type": "boolean",
+      "default": true
+    },
+    "flattenSubmenu": {
+      "type": "boolean",
+      "default": false
     },
     "maxNestingLevel": {
       "type": "number",

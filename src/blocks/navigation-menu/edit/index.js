@@ -5,7 +5,7 @@ import { useEffect, useState, useCallback } from '@wordpress/element';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { EntityProvider } from '@wordpress/core-data';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { PanelBody, SelectControl, Button, TextControl, ToggleControl, __experimentalHStack as HStack, __experimentalVStack as VStack } from '@wordpress/components';
+import { PanelBody, SelectControl, Button, TextControl, RangeControl, ToggleControl, __experimentalHStack as HStack, __experimentalVStack as VStack } from '@wordpress/components';
 
 import ManageMenusButton from './manage-menus-button';
 import useNavigationMenu from './../use-navigation-menu';
@@ -13,9 +13,11 @@ import NavigationInnerBlocks from './navigation-inner-blocks';
 import { getTemplateConfig } from './../constants';
 
 import { getBreakpoints } from '@groundworx/utils';
-import { getEditorCanvasWidth, getEditorCanvasElement, getValidOrDefault } from './../../navigation/utils.js';
+import { getEditorCanvasWidth, useResponsiveLayout, getEditorCanvasElement, getValidOrDefault } from './../../navigation/utils.js';
 
 import { getLayoutConfig, layoutTemplates } from './../../navigation/constants.js';
+
+import './../index.scss';
 
 const Edit = (props) => {
     const {
@@ -34,6 +36,9 @@ const Edit = (props) => {
         toType,
         showSubmenuIcon,
         openSubmenusOnHover,
+        indentSubmenu,
+        maxNestingLevel,
+        flattenSubmenu,
         responsive,
 	    templateLock
     } = attributes;
@@ -42,7 +47,7 @@ const Edit = (props) => {
 
     let { allowedTypes } = getLayoutConfig(template);
     
-    const [shouldSwitchLayout, setShouldSwitchLayout] = useState(false);
+    const shouldSwitchLayout = useResponsiveLayout(toggleBehavior, switchAt);
 
     const layoutType = shouldSwitchLayout ? toType : type;
     const config = getTemplateConfig(layoutType);
@@ -69,29 +74,6 @@ const Edit = (props) => {
         });
     }, [typeConfig, toTypeConfig, switchAt]);
 
-    useEffect(() => {
-        if (!toType || !switchAt) {
-            setShouldSwitchLayout(false);
-            return;
-        }
-
-        const updateLayoutSwitch = () => {
-            const canvasWidth = getEditorCanvasWidth();
-            const resolved = getBreakpoints.resolve(switchAt);
-            setShouldSwitchLayout(canvasWidth >= resolved);
-        };
-
-        updateLayoutSwitch();
-
-        const resizeObserver = new ResizeObserver(updateLayoutSwitch);
-        const iframe = document.querySelector('iframe[name="editor-canvas"]');
-        if (iframe?.contentDocument?.body) {
-            resizeObserver.observe(iframe.contentDocument.body);
-        }
-
-        return () => resizeObserver.disconnect();
-    }, [toType, switchAt]);
-
     function getEditorLayoutClasses(layoutType ) {
         return clsx(
             `layout-type--${layoutType}`,
@@ -104,6 +86,8 @@ const Edit = (props) => {
             getEditorLayoutClasses(layoutType),
             {
                 'is-responsive': responsive,
+                'is-flatten': flattenSubmenu,
+                'is-indent': indentSubmenu,
                 'is-vertical': orientation === 'vertical'
             },
             layoutClassNames
@@ -215,66 +199,26 @@ const Edit = (props) => {
         !hasManagePermissions || !hasResolvedNavigationMenus;
 
     useEffect(() => {
-        if (toggleBehavior === true) {
-            setShouldSwitchLayout(false);
+        // Only react to template changes to avoid race conditions with parent's toggleBehavior updates
+        const config = getLayoutConfig(template);
+        
+        // Exit early if we're in a non-responsive mode (handled by initial attributes)
+        if (toggleBehavior !== 'responsive') {
             return;
         }
 
-        const updateLayoutSwitch = () => {
-            const canvasWidth = getEditorCanvasWidth();
-            const resolved = getBreakpoints.resolve(switchAt);
-            setShouldSwitchLayout(canvasWidth >= resolved);
-        };
+        const next = {};
 
-        updateLayoutSwitch();
-
-        const resizeObserver = new ResizeObserver(updateLayoutSwitch);
-        const target = getEditorCanvasElement();
-
-        if (target) {
-            resizeObserver.observe(target);
+        // Set type for before-toggle state
+        if (config.allowedTypes && config.allowedTypes.length > 0) {
+            const defaultType = config.allowedTypes.find(t => t.isDefault)?.value || config.allowedTypes[0].value;
+            next.type = getValidOrDefault(type, config.allowedTypes, defaultType);
         }
 
-        return () => resizeObserver.disconnect();
-    }, [toType, switchAt]);
-
-    useEffect(() => {
-        const config = getLayoutConfig(template);
-
-        const resolvedToggleBehavior = getValidOrDefault(toggleBehavior, config.behaviorOptions, false);
-
-        const next = {
-            toggleBehavior: resolvedToggleBehavior,
-            type: resolvedToggleBehavior === false
-                ? 'horizontal-menu'
-                : getValidOrDefault(type, config.allowedTypes, ''),
-        };
-
-        if ( resolvedToggleBehavior === 'responsive' ) {
-            // pick first allowed breakpoint or fall back to 'tablet'
-            const switchAtDefault =
-                getValidOrDefault(
-                    switchAt,
-                    [
-                        { value: 'tablet' },
-                        { value: 'laptop' },
-                        { value: 'desktop' },
-                        { value: 'large-desktop' },
-                    ],
-                    'tablet'
-                );
-
-            // keep your existing toType logic, but base it on *resolved* value
-            next.toType =
-                config.allowedToTypes?.length
-                    ? getValidOrDefault(
-                            toType,
-                            config.allowedToTypes,
-                            config.allowedToTypes[ 0 ].value
-                    )
-                    : next.type;
-        } else {
-            next.toType   = '';
+        // Set toType for after-toggle state
+        if (config.allowedToTypes?.length) {
+            const defaultToType = config.allowedToTypes.find(t => t.isDefault)?.value || config.allowedToTypes[0].value;
+            next.toType = getValidOrDefault(toType, config.allowedToTypes, defaultToType);
         }
 
         const changed = Object.entries(next).some(
@@ -284,7 +228,7 @@ const Edit = (props) => {
         if (changed) {
             setAttributes(next);
         }
-    }, [template, toggleBehavior, type, toType]);
+    }, [template]);
 
     
     return (
@@ -316,7 +260,32 @@ const Edit = (props) => {
                         checked={!!showSubmenuIcon}
                         onChange={(val) => setAttributes({ showSubmenuIcon: val })}
                     />
-                
+
+                    <RangeControl
+                        label={__('Max Visible Nesting Level', 'groundworx-navigation')}
+                        help={__('Limits submenu depth. All levels remain visible in the editor.', 'groundworx-navigation')}
+                        value={maxNestingLevel}
+                        onChange={(val) => setAttributes({ maxNestingLevel: val })}
+                        min={1}
+                        max={5}
+                        step={1}
+                    />
+                    { maxNestingLevel > 1 && (
+                        <>
+                            <ToggleControl
+                                label={__('Indent Submenu', 'groundworx-navigation')}
+                                checked={!!indentSubmenu}
+                                onChange={(val) => setAttributes({ indentSubmenu: val })}
+                            />
+
+                            <ToggleControl
+                                label={__('Flatten Submenu', 'groundworx-navigation')}
+                                help={__('Display all items at the same level.', 'groundworx-navigation')}
+                                checked={!!flattenSubmenu}
+                                onChange={(val) => setAttributes({ flattenSubmenu: val })}
+                            />
+                        </>
+                    )}
                 </PanelBody>
 
                 <PanelBody title="Menu Settings" initialOpen>
