@@ -175,6 +175,11 @@ npm run build
 
 ## Changelog
 
+### 1.0.6
+* Fix: Resolved slide-in template layout propagation issue that caused menu to display incorrect layout type (horizontal-menu instead of accordion)
+* Fix: Improved scrollbar color and behavior for long navigation menus that exceed screen height
+* Fix: Corrected React hook dependency array to prevent crash when switching toggle behavior modes
+
 ### 1.0.5
 * New: Added Max Visible Nesting Level control (1-5 levels) to limit submenu depth for visitors
 * New: Added Indent Submenu and Flatten Submenu options for enhanced menu structure control  
@@ -215,4 +220,4 @@ GPL v2 or later - See [LICENSE](LICENSE) file for details.
 ## Credits
 
 Created by [Groundworx](https://groundworx.dev)  
-Maintained by [Johanne Courtright](https://github.com/alexandrie)
+Maintained by [Johanne Courtright](https://github.com/johannecourtright)

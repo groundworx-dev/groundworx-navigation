@@ -351,7 +351,7 @@ class GWXNavigationBlockRenderer {
 		$template = !empty($attributes['template']) ? $attributes['template'] : 'classic';
 		$template_map = [
 			'modal'           => 'modal',
-			'modal-dropdown'  => 'modal-dropdown',
+			'modal-dropdown'  => 'modal',
 			'slide-in'        => 'slide-in',
 		];
 		$layout = $template_map[$template] ?? 'menu';

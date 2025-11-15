@@ -243,7 +243,7 @@ function Edit(props) {
 		const isSlideIn = template === 'slide-in';
 
 		const templateMap = {
-			modal: 'modal',
+			'modal': 'modal',
 			'modal-dropdown': 'modal',
 			'slide-in': 'slide-in',
 		};
@@ -251,13 +251,13 @@ function Edit(props) {
 		const layout = templateMap[template] || 'menu';
 		
 		return clsx(
-			`is-template--${template}`,
+			`is-template-${template}`,
 			position && `is-position-${position}`,
 
 			!isSlideIn && isModal && !shouldSwitchLayout && `has-${layout}`,
 			!isSlideIn && isModal && !shouldSwitchLayout && shouldOpenModal && `has-${layout}-open`,
 			!isSlideIn && isModal && !shouldSwitchLayout && !shouldOpenModal && `has-${layout}-close`,
-			
+
 			isSlideIn && isModal && !shouldSwitchLayout && 'has-modal-dropdown',
 			isSlideIn && isModal && !shouldSwitchLayout && shouldOpenModal && 'has-modal-dropdown-open',
 			isSlideIn && isModal && !shouldSwitchLayout && !shouldOpenModal && 'has-modal-dropdown-close',

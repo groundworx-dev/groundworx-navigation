@@ -199,26 +199,29 @@ const Edit = (props) => {
         !hasManagePermissions || !hasResolvedNavigationMenus;
 
     useEffect(() => {
-        // Only react to template changes to avoid race conditions with parent's toggleBehavior updates
         const config = getLayoutConfig(template);
         
-        // Exit early if we're in a non-responsive mode (handled by initial attributes)
-        if (toggleBehavior !== 'responsive') {
-            return;
-        }
+        const resolvedToggleBehavior = getValidOrDefault(toggleBehavior, config.behaviorOptions, false);
 
-        const next = {};
+        const next = {
+            toggleBehavior: resolvedToggleBehavior,
+            type: resolvedToggleBehavior === false
+                ? 'horizontal-menu'
+                : getValidOrDefault(type, config.allowedTypes, ''),
+        };
 
-        // Set type for before-toggle state
-        if (config.allowedTypes && config.allowedTypes.length > 0) {
-            const defaultType = config.allowedTypes.find(t => t.isDefault)?.value || config.allowedTypes[0].value;
-            next.type = getValidOrDefault(type, config.allowedTypes, defaultType);
-        }
-
-        // Set toType for after-toggle state
-        if (config.allowedToTypes?.length) {
-            const defaultToType = config.allowedToTypes.find(t => t.isDefault)?.value || config.allowedToTypes[0].value;
-            next.toType = getValidOrDefault(toType, config.allowedToTypes, defaultToType);
+        if ( resolvedToggleBehavior === 'responsive' ) {
+            // Set toType for after-toggle state
+            next.toType =
+                config.allowedToTypes?.length
+                    ? getValidOrDefault(
+                            toType,
+                            config.allowedToTypes,
+                            config.allowedToTypes[ 0 ].value
+                    )
+                    : next.type;  // If no allowedToTypes (like slide-in), use the same type
+        } else {
+            next.toType = '';
         }
 
         const changed = Object.entries(next).some(
@@ -228,7 +231,7 @@ const Edit = (props) => {
         if (changed) {
             setAttributes(next);
         }
-    }, [template]);
+    }, [template, type, toType]);
 
     
     return (
